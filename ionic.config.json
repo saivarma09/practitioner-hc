@@ -1,0 +1,7 @@
+{
+  "name": "practitioner-hc",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

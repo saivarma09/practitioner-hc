@@ -1,0 +1,21 @@
+.login-btn{
+   border-radius: var(--ion-border-radius);
+    font-family:'poppins', sans-serif;
+    letter-spacing: 1px;
+    color: var(--ion-white-color);
+    background: var(--ion-btn-primary-color);
+    font-weight: 600;
+}
+
+.hc-logo{
+    max-width: 400px;
+}
+
+.logo-doctor-icon{
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    svg{
+        max-width: 400px;
+    }
+}

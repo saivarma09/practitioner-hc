@@ -1,0 +1,32 @@
+:root {
+  --ion-primary-color: #242424;
+  --ion-background-color: #ffffff;
+  --ion-secondary-color: #EEEEEE;
+  --ion-login-image-color: #6b63ff;
+  --ion-btn-primary-color: linear-gradient(180deg, rgba(6, 7, 8, 1) 0%, rgba(18, 13, 61, 1) 50%);
+  --ion-border-radius: 0.5rem;
+  --ion-white-color: #ffffff;
+  --ion-black-color: #242424;
+  --ion-dashboard-header: #120d3d;
+
+
+  --app-font-family: 'manrope', sans-serif !important;
+  --ion-default-font: 'manrope', sans-serif !important;
+  --app-font-weight-normal: 400;
+  --app-font-weight-bold: 600;
+  --app-font-size-base: 1rem;
+  /* 16px */
+  --app-font-size-large: 1.5rem;
+  /* 24px */
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --ion-primary-color: #ffffff;
+    --ion-background-color: #242424;
+    --ion-secondary-color: #727272;
+    --ion-login-image-color: #ffffff;
+    --ion-btn-primary-color: #727272;
+    --ion-dashboard-header: #727272;
+  }
+}
