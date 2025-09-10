@@ -1,9 +1,8 @@
 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
-
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonSkeletonText } from '@ionic/angular/standalone';
 
 
 
@@ -12,8 +11,8 @@ export const COMMON_MODULES = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
-  IonicModule,
   RouterModule,
+  IonHeader, IonToolbar, IonTitle, IonContent, IonSkeletonText
 ];
 
 

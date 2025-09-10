@@ -131,11 +131,58 @@ ion-row {
 }
 
 /* 20px → 28px */
-.fs-6 {
-    font-size: clamp(1.5rem, 2.5vw, 2rem) !important;
-}
+/* Dynamic Font Sizes */
 
 /* 24px → 32px */
+.fs-6 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem) !important;
+}
+
+/* 26px → 34px */
+.fs-7 {
+  font-size: clamp(1.625rem, 2.7vw, 2.125rem) !important;
+}
+
+/* 28px → 36px */
+.fs-8 {
+  font-size: clamp(1.75rem, 2.9vw, 2.25rem) !important;
+}
+
+/* 30px → 38px */
+.fs-9 {
+  font-size: clamp(1.875rem, 3vw, 2.375rem) !important;
+}
+
+/* 32px → 40px */
+.fs-10 {
+  font-size: clamp(2rem, 3.2vw, 2.5rem) !important;
+}
+
+/* 34px → 42px */
+.fs-11 {
+  font-size: clamp(2.125rem, 3.4vw, 2.625rem) !important;
+}
+
+/* 36px → 44px */
+.fs-12 {
+  font-size: clamp(2.25rem, 3.6vw, 2.75rem) !important;
+}
+
+/* 38px → 46px */
+.fs-13 {
+  font-size: clamp(2.375rem, 3.8vw, 2.875rem) !important;
+}
+
+/* 40px → 48px */
+.fs-14 {
+  font-size: clamp(2.5rem, 4vw, 3rem) !important;
+}
+
+/* 42px → 50px */
+.fs-15 {
+  font-size: clamp(2.625rem, 4.2vw, 3.125rem) !important;
+}
+
 
 
 
@@ -486,3 +533,31 @@ ion-row {
 .flex-1{
     flex: 1;
 }
+
+
+.secondary-text{
+    color: var(--ion-secondary-text-color);
+}
+
+
+/* Base dynamic font sizes (already included by you) */
+
+/* iPad Landscape (bigger scaling) */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  .fs-1 { font-size: clamp(0.75rem, 1.2vw, 1rem) !important; }
+  .fs-2 { font-size: clamp(0.875rem, 1.4vw, 1.125rem) !important; }
+  .fs-3 { font-size: clamp(1rem, 1.7vw, 1.25rem) !important; }
+  .fs-4 { font-size: clamp(1.125rem, 2vw, 1.5rem) !important; }
+  .fs-5 { font-size: clamp(1.25rem, 2.3vw, 1.75rem) !important; }
+  .fs-6 { font-size: clamp(1.5rem, 2.8vw, 2rem) !important; }
+  .fs-7 { font-size: clamp(1.625rem, 3vw, 2.125rem) !important; }
+  .fs-8 { font-size: clamp(1.75rem, 3.2vw, 2.25rem) !important; }
+  .fs-9 { font-size: clamp(1.875rem, 3.4vw, 2.375rem) !important; }
+  .fs-10 { font-size: clamp(2rem, 3.6vw, 2.5rem) !important; }
+  .fs-11 { font-size: clamp(2.125rem, 3.8vw, 2.625rem) !important; }
+  .fs-12 { font-size: clamp(2.25rem, 4vw, 2.75rem) !important; }
+  .fs-13 { font-size: clamp(2.375rem, 4.2vw, 2.875rem) !important; }
+  .fs-14 { font-size: clamp(2.5rem, 4.4vw, 3rem) !important; }
+  .fs-15 { font-size: clamp(2.625rem, 4.6vw, 3.125rem) !important; }
+}
+

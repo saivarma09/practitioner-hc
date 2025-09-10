@@ -1,0 +1,42 @@
+ion-toolbar{
+padding: 1rem 0.75rem;
+}
+
+
+.allergie-chip{
+    background: var(--ion-secondary-color);
+    padding: 0.25rem 1rem;
+    width: fit-content;
+    border-radius: 50px;
+    font-weight: 300;
+}
+
+.vital-values{
+    color: var(--ion-secondary-text-color);
+}
+
+
+.notes-icon{
+    position: relative;
+}
+
+.notes-icon::after{
+    content: "";
+    background: var(--ion-secondary-text-color);
+    display: block;
+    position: absolute;
+    height: 2rem;
+    width: 1px;
+    left: 50%;
+    top: calc(100% + 4px);
+}
+
+
+.add-notes-btn{
+    background: var( --ion-btn-primary-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: var(--ion-white-color);
+    font-family:'poppins', sans-serif;
+    letter-spacing: 1px;
+}

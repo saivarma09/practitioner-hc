@@ -19,39 +19,34 @@
   <div class="ion-display-flex flex-column gap-2">
   <section class="ion-display-flex gap-1 flex-column">
     <div class="fs-3">Today's schedules</div>
-    @if(true){
-    <div class="ion-display-flex flex-column gap-1">
-      @for (loader of loaders; track $index) {
-      <section class="loading-section">
-        <ion-skeleton-text animated class="profile"></ion-skeleton-text>
+    <div class="ion-display-flex flex-column gap-1" *ngIf="showSkeletons">
+      <section class="loading-section" *ngFor="let loader of loaders; let i = index">
+        <ion-skeleton-text [animated]="true" class="profile"></ion-skeleton-text>
         <div class="text-group">
-          <ion-skeleton-text animated class="type"></ion-skeleton-text>
-          <ion-skeleton-text animated class="date"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" class="type"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" class="date"></ion-skeleton-text>
         </div>
       </section>
-      }
-    </div>}
+    </div>
   </section>
   <section class="ion-display-flex gap-1 flex-column">
     <div class="fs-3">Quick stats</div>
-    @if(true){
-    <section class="ion-display-flex gap-1 flex-column">
+    <section class="ion-display-flex gap-1 flex-column" *ngIf="showSkeletons">
       <div class="ion-display-flex gap-1 w-100">
         <div class="ion-display-flex flex-column gap-0-25 w-50 ion-padding background-stats">
-          <ion-skeleton-text animated class="appontments"></ion-skeleton-text>
-          <ion-skeleton-text animated class="appontments w-50"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" class="appontments"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" class="appontments w-50"></ion-skeleton-text>
         </div>
         <div class="ion-display-flex flex-column gap-0-25 w-50 ion-padding background-stats">
-          <ion-skeleton-text animated class="revenue"></ion-skeleton-text>
-          <ion-skeleton-text animated class="revenue w-50"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" class="revenue"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" class="revenue w-50"></ion-skeleton-text>
         </div>
       </div>
       <div class="ion-display-flex flex-column gap-0-25  ion-padding background-stats">
-        <ion-skeleton-text animated class="patient-satisfaction"></ion-skeleton-text>
-        <ion-skeleton-text animated class="patient-satisfaction w-50"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" class="patient-satisfaction"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" class="patient-satisfaction w-50"></ion-skeleton-text>
       </div>
     </section>
-    }
   </section>
   <section class="ion-display-flex gap-1 flex-column">
     <div class="fs-3">Patients</div>

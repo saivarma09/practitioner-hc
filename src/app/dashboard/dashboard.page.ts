@@ -15,7 +15,9 @@ export class DashboardPage implements OnInit {
   userInfo = {
     name: 'John Doe'
   };
-  loaders = ['','','','']
+  loaders = ['','','',''];
+  showSkeletons = true;
+  
   constructor() { }
 
   ngOnInit() {

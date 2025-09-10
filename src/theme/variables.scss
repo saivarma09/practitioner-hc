@@ -1,13 +1,17 @@
 :root {
-  --ion-primary-color: #242424;
+  --ion-primary-color: #000000;
   --ion-background-color: #ffffff;
   --ion-secondary-color: #EEEEEE;
+  --ion-secondary-text-color: #808080;
   --ion-login-image-color: #6b63ff;
   --ion-btn-primary-color: linear-gradient(180deg, rgba(6, 7, 8, 1) 0%, rgba(18, 13, 61, 1) 50%);
   --ion-border-radius: 0.5rem;
   --ion-white-color: #ffffff;
-  --ion-black-color: #242424;
+  --ion-black-color: #000000;
   --ion-dashboard-header: #120d3d;
+  --ion-success-color:#00B106;
+  --ion-progress-color:#DA9602;
+  --ion-danger-color:#FF0000;
 
 
   --app-font-family: 'manrope', sans-serif !important;
@@ -23,7 +27,9 @@
 @media (prefers-color-scheme: dark) {
   body {
     --ion-primary-color: #ffffff;
-    --ion-background-color: #242424;
+    --ion-background-color: #000000 !important;
+
+    --ion-background-color-rgb: 36, 36, 36 !important; 
     --ion-secondary-color: #727272;
     --ion-login-image-color: #ffffff;
     --ion-btn-primary-color: #727272;

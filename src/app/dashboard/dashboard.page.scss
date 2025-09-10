@@ -15,7 +15,7 @@ ion-toolbar::part(background) {
 }
 
 ion-toolbar::part(container) {
-    padding-top: 2rem;
+    padding-top: 4rem;
 }
 
 ion-toolbar {
@@ -52,6 +52,30 @@ ion-toolbar {
   width: 40%;
   height: 14px;
   border-radius: 4px;
+}
+
+// Android-specific skeleton text fixes
+ion-skeleton-text {
+  --background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.13);
+  --background-rgb: var(--ion-text-color-rgb, 0, 0, 0);
+  
+  &.appontments {
+    width: 80%;
+    height: 20px;
+    border-radius: 4px;
+  }
+  
+  &.revenue {
+    width: 70%;
+    height: 20px;
+    border-radius: 4px;
+  }
+  
+  &.patient-satisfaction {
+    width: 90%;
+    height: 20px;
+    border-radius: 4px;
+  }
 }
 
 
