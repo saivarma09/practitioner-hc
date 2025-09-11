@@ -62,6 +62,7 @@ export class AppComponent {
                   // Process the SSO code
                   const success = await this.configurationService.generateSsoSession(code);
                   if (success) {
+                    console.log(success)
                     console.log('SSO session generated successfully');
                     // Navigation is handled within generateSsoSession
                   } else {
@@ -135,4 +136,7 @@ export class AppComponent {
       });
     }, 300);
   }
+
+
+  
 }

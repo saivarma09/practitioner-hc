@@ -30,8 +30,9 @@ export class ConfigurationService {
   prompt: 'none' | 'login' | 'consent' = 'none';
   siteId: string = '';
   state: string = '';
+  code: string | null = null; // Store the SSO code
   private currentPKCE: any = null; // Store PKCE for the session
-
+  
   constructor(private ssoAuthService: SsoAuthenticationService, private router: Router, private http: HttpClient) { }
 
   async initiateApp(): Promise<void> {
@@ -95,7 +96,7 @@ export class ConfigurationService {
         try {
           // Step 1: Get sessionData
           const sessionData = await this.ssoAuthService
-            .getTokenUsingParamCode(paramCodeValue, this.clientId);
+            .getTokenUsingParamCode(paramCodeValue, this.clientId) //pending;
 
           if (!sessionData?.token) {
             console.error('Invalid session data. Access token is missing.');
@@ -118,7 +119,13 @@ export class ConfigurationService {
             
             // Reset prompt after successful login
             this.prompt = 'none';
-            this.router.navigate(['/dashboard']);
+
+
+            this.ssoAuthService.getUser(session.sessionData.token).then(userData => {
+              console.log('User data fetched successfully:', userData);
+              localStorage.setItem('userData', JSON.stringify(userData));
+              this.router.navigate(['/login-success']);
+            });
             resolve(true);
           } else {
             console.log('Incomplete ssoSession data received.');
@@ -263,4 +270,10 @@ export class ConfigurationService {
 
     return { verifier: randomVerifier, challenge: challenge };
 }
+
+get userInfo(): any {
+  const userData = localStorage.getItem('userData');
+  return userData ? JSON.parse(userData) : null;
+}
+
 }

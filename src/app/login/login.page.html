@@ -28,8 +28,21 @@
       <div size="12">
         <div class="fs-6">Welcome,</div>
       </div>
+      <div>
+        <ion-list>
+          <ion-item>
+            <ion-select aria-label="Fruit" interface="action-sheet" placeholder="Select fruit">
+       @for(site of sites; track site.siteId) {
+              <ion-select-option [value]="site.siteId">{{site.siteId}}, {{site.siteName}}</ion-select-option>
+       }
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
       <div size="12" class="section section-2">
-        <button class="text-uppercase login-btn ion-padding w-100 fs-2 ion-display-flex align-center justify-center gap-1" (click)="openExternalLogin()"><img  src="assets/icon/hc-logo.svg">Login with
+        <button
+          class="text-uppercase login-btn ion-padding w-100 fs-2 ion-display-flex align-center justify-center gap-1"
+          (click)="openExternalLogin()"><img src="assets/icon/hc-logo.svg">Login with
           healthcode</button>
       </div>
       <div size="12" class="section section-3">

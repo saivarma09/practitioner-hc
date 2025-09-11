@@ -1,6 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom, map } from 'rxjs';
+import { catchError, firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 export interface SsoSession {
@@ -52,6 +52,34 @@ export class SsoAuthenticationService {
 
     return firstValueFrom(observable$);
   }
+
+
+
+    getUser(accessToken: string): Promise<any> {
+    const headers = this.getHeadersByToken(accessToken);
+    return firstValueFrom(
+      this.http.get<any>(`${environment.healthcodeAccounts_host}/api/restricted/user`, { headers }).pipe(
+        catchError((error => {
+          console.error('Error fetching user data:', error);
+          throw error;
+        }) )
+      )
+    );
+  }
+
+
+
+   private getHeadersByToken(token: string, siteId: string = ''): HttpHeaders {
+
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'SU-SiteId': siteId,
+    });
+  }
+
+
+  
 
 
 }
