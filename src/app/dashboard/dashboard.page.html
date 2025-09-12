@@ -5,7 +5,7 @@
         <div><i class="fa-light fs-6 fa-circle-user"></i></div>
         <div>
           <div class="fs-1">Hello,</div>
-          <div class="fs-5">{{userInfo.name}}</div>
+          <div class="fs-5">{{userName}}</div>
         </div>
       </div>
       <div class="notification-icon">
@@ -31,27 +31,43 @@
   </section>
   <section class="ion-display-flex gap-1 flex-column">
     <div class="fs-3">Quick stats</div>
-    <section class="ion-display-flex gap-1 flex-column" *ngIf="showSkeletons">
+    <section class="ion-display-flex gap-1 flex-column" >
       <div class="ion-display-flex gap-1 w-100">
-        <div class="ion-display-flex flex-column gap-0-25 w-50 ion-padding background-stats">
+        <div class="ion-display-flex flex-column gap-0-5 w-50 ion-padding background-stats">
+          @if(showCountsSkeletons){
           <ion-skeleton-text [animated]="true" class="appontments"></ion-skeleton-text>
-          <ion-skeleton-text [animated]="true" class="appontments w-50"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" class="appontments w-50"></ion-skeleton-text>}
+          @else{
+            <div>Task</div>
+            <div class="fs-6">{{appointmentCounts.data.task.totalTasks}}</div>
+          }
+
         </div>
         <div class="ion-display-flex flex-column gap-0-25 w-50 ion-padding background-stats">
+          @if(showCountsSkeletons){
           <ion-skeleton-text [animated]="true" class="revenue"></ion-skeleton-text>
-          <ion-skeleton-text [animated]="true" class="revenue w-50"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" class="revenue w-50"></ion-skeleton-text>}
+          @else{
+            <div>Appointments</div>
+            <div class="fs-6">{{appointmentCounts.data.appointments.totalAppointments}}</div>
+          }
         </div>
       </div>
-      <div class="ion-display-flex flex-column gap-0-25  ion-padding background-stats">
+      <div class="ion-display-flex flex-column gap-0-5 ion-padding background-stats">
+        @if(showCountsSkeletons){
         <ion-skeleton-text [animated]="true" class="patient-satisfaction"></ion-skeleton-text>
-        <ion-skeleton-text [animated]="true" class="patient-satisfaction w-50"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" class="patient-satisfaction w-50"></ion-skeleton-text>}
+        @else{
+          <div>Today appointments</div>
+          <div class="fs-6">{{appointmentCounts.data.todayAppointments.todayAppointments}}</div>
+        }
       </div>
     </section>
   </section>
   <section class="ion-display-flex gap-1 flex-column">
     <div class="fs-3">Patients</div>
     <section class="ion-display-flex flex-column gap-1">
-      <div class="ion-display-flex align-center gap-1">
+      <div class="ion-display-flex align-center gap-1" (click)="patientInfo()">
         <div class="background-patient"><i class="fa-light fa-user"></i></div>
         <div class="flex-1">Patients</div>
         <div><i class="fa-light fa-chevron-right"></i></div>

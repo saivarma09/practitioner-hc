@@ -1,13 +1,65 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>patients-info</ion-title>
+    <div class="ion-display-flex align-center gap-0-75 fs-4" (click)="backRoute()">
+      <i class="fa-light fa-chevron-left"></i>
+      <div>Patients</div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">patients-info</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <div class="px-1">
+    <ion-searchbar class="custom" animated="true"></ion-searchbar>
+  </div>
+  @if (!patients.length) {
+  <!-- Skeleton Loading -->
+  <div class="ion-display-flex flex-column ion-padding">
+    @for (patient of patientsSkeleton; track $index) {
+    <div class="skeleton-design ion-display-flex gap-1 align-center p-1">
+      <ion-skeleton-text [animated]="true" class="patient-skeleton-icon"></ion-skeleton-text>
+      <div class="flex-1">
+        <ion-skeleton-text [animated]="true" class="patient-skeleton-name w-75"></ion-skeleton-text>
+        <div class="ion-display-flex gap-0-5">
+          <ion-skeleton-text [animated]="true" class="patient-skeleton-dob w-20"></ion-skeleton-text>
+          <div class="seperator">|</div>
+          <ion-skeleton-text [animated]="true" class="patient-skeleton-gender w-20"></ion-skeleton-text>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  } @else {
+  <!-- Patient List -->
+  <div class="ion-display-flex flex-column ion-padding">
+    @for (patient of patients; track patient.id; let i = $index) {
+    <div class="ion-display-flex gap-1 align-center p-1 patient-info">
+      <div class="profile-icon position-relative"><svg viewBox="0 0 32 32" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M6.81237 20.6843C4.51372 21.9137 -1.51315 24.425 2.1582 27.5684C3.95002 29.1029 5.94652 30.2009 8.45636 30.2009H22.7811C25.2926 30.2009 27.2891 29.1029 29.0809 27.5684C32.7523 24.425 26.7254 21.9137 24.4268 20.6843C21.759 19.2679 18.7172 18.5207 15.6188 18.5207C12.5203 18.5207 9.48013 19.2679 6.81237 20.6843ZM22.9306 7.5702C22.9306 9.31273 22.1604 10.9839 20.7895 12.216C19.4185 13.4482 17.5592 14.1404 15.6204 14.1404C13.6816 14.1404 11.8222 13.4482 10.4513 12.216C9.08034 10.9839 8.31016 9.31273 8.31016 7.5702C8.31016 5.82768 9.08034 4.15652 10.4513 2.92437C11.8222 1.69222 13.6816 1 15.6204 1C17.5592 1 19.4185 1.69222 20.7895 2.92437C22.1604 4.15652 22.9306 5.82768 22.9306 7.5702Z"
+            [attr.stroke]="strokeColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+
+        <div class="patient-deceased" [class.isDeceased]="patient.deceased"></div>
+      </div>
+      <div class="ion-display-flex flex-column gap-0-25 flex-1">
+        <div class="fs-3 word-break">{{ patient.title }} {{ patient.firstName }} {{ patient.lastName }}</div>
+        <div class="secondary-text fs-2 ion-display-flex gap-0-25">
+          @if(patient.age){<div>{{ patient.age }}</div>}@if(patient.age && patient.sex){|}@if(patient.sex){<div> {{ patient.sex | gender }}</div>}
+        </div>
+      </div>
+      <div><i class="fa-light fs-3 fa-chevron-right"></i></div>
+    </div>
+
+    }
+  </div>
+
+  <!-- <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more patients...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll> -->
+  }
 </ion-content>

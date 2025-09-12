@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Browser } from '@capacitor/browser';
 import { HttpClient } from '@angular/common/http';
 import { SsoAuthenticationService } from '../sso-authentication/sso-authentication';
+import { LoadingController } from '@ionic/angular/standalone';
 
 declare let cordova: any;
 
@@ -32,8 +33,8 @@ export class ConfigurationService {
   state: string = '';
   code: string | null = null; // Store the SSO code
   private currentPKCE: any = null; // Store PKCE for the session
-  
-  constructor(private ssoAuthService: SsoAuthenticationService, private router: Router, private http: HttpClient) { }
+
+  constructor(private ssoAuthService: SsoAuthenticationService, private router: Router, private http: HttpClient, private loadingCtrl: LoadingController) { }
 
   async initiateApp(): Promise<void> {
     console.log('Initiating application configuration...');
@@ -92,7 +93,7 @@ export class ConfigurationService {
     return new Promise(async (resolve, reject) => {
       if (paramCodeValue) {
         console.log('SSO code found in URL parameters:', paramCodeValue);
-        
+
         try {
           // Step 1: Get sessionData
           const sessionData = await this.ssoAuthService
@@ -116,17 +117,22 @@ export class ConfigurationService {
             };
             localStorage.setItem('ssoSession', JSON.stringify(ssoSession));
             console.log('SSO session created successfully:', ssoSession);
-            
+
             // Reset prompt after successful login
             this.prompt = 'none';
 
-
+            const loading = await this.loadingCtrl.create({
+              message: 'Loading your clinical tools...',
+            });
+            await loading.present();
             this.ssoAuthService.getUser(session.sessionData.token).then(userData => {
               console.log('User data fetched successfully:', userData);
               localStorage.setItem('userData', JSON.stringify(userData));
-              this.router.navigate(['/login-success']);
+              loading.dismiss();
+              this.router.navigate(['/site-selection']);
+              resolve(true);
             });
-            resolve(true);
+
           } else {
             console.log('Incomplete ssoSession data received.');
             reject(new Error('Incomplete session data'));
@@ -146,11 +152,11 @@ export class ConfigurationService {
     try {
       // Ensure any existing browser session is properly closed
       await this.closeBrowserSafely();
-      
+
       // Generate fresh PKCE for each attempt
       this.currentPKCE = await this.generatePKCEPair();
       const url = `${environment.healthcodeSSO_host}${this.getAuthorizeURLString(this.currentPKCE.challenge)}`;
-      
+
       console.log('Redirecting to SSO URL:', url);
       console.log('Using prompt:', this.prompt);
 
@@ -159,7 +165,7 @@ export class ConfigurationService {
 
       // Use Capacitor Browser plugin if available
       if ((window as any).Capacitor) {
-        await Browser.open({ 
+        await Browser.open({
           url,
           windowName: '_blank',
           toolbarColor: '#ffffff',
@@ -173,7 +179,7 @@ export class ConfigurationService {
         const target = '_blank';
         const options = 'location=yes,clearcache=yes,clearsessioncache=yes,toolbar=yes,zoom=no';
         const browser = cordova.InAppBrowser.open(url, target, options);
-        
+
         browser.addEventListener('loadstop', (event: any) => {
           console.log('Browser loadstop:', event.url);
           if (event.url && event.url.includes('callback')) {
@@ -231,7 +237,7 @@ export class ConfigurationService {
   getAuthorizeURLString(codeChallenge: string): string {
     // Generate a unique state for each request
     this.state = Math.random().toString(36).substring(2, 15);
-    
+
     return `/authorize?client_id=${this.clientId}` +
       `&response_type=code&scope=openid%20siteid%20email%20offline_access` +
       `&prompt=${this.prompt}` +
@@ -250,7 +256,7 @@ export class ConfigurationService {
     // Clear local session
     localStorage.removeItem('ssoSession');
     this.prompt = 'none'; // Reset prompt
-    
+
     return this.http.get(environment.healthcodeSSO_host + '/logout');
   }
 
@@ -258,22 +264,19 @@ export class ConfigurationService {
 
   async generatePKCEPair(): Promise<any> {
     const randomVerifier = Array.from(crypto.getRandomValues(new Uint8Array(32)))
-        .map(b => ('0' + b.toString(16)).slice(-2))
-        .join('');
+      .map(b => ('0' + b.toString(16)).slice(-2))
+      .join('');
 
     const challenge = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(randomVerifier))
-        .then(hashBuffer => btoa(String.fromCharCode(...new Uint8Array(hashBuffer)))
-            .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''));
+      .then(hashBuffer => btoa(String.fromCharCode(...new Uint8Array(hashBuffer)))
+        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''));
 
     // Store in local storage if needed
     localStorage.setItem('pkceGeneratedCode', JSON.stringify({ verifier: randomVerifier, challenge }));
 
     return { verifier: randomVerifier, challenge: challenge };
-}
+  }
 
-get userInfo(): any {
-  const userData = localStorage.getItem('userData');
-  return userData ? JSON.parse(userData) : null;
-}
+
 
 }

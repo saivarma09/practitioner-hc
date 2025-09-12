@@ -1,6 +1,6 @@
 
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonSkeletonText } from '@ionic/angular/standalone';
 
@@ -20,3 +20,8 @@ export const COMMON_MODULES = [
 export const FORM_MODULES = [
   IonItem, IonList, IonSelect, IonSelectOption
 ];  
+
+
+export const REACTIVE_FORM_MODULES = [
+   ReactiveFormsModule
+]

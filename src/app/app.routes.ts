@@ -25,5 +25,9 @@ export const routes: Routes = [
   {
     path: 'add-patient',
     loadComponent: () => import('./add-patient/add-patient.page').then( m => m.AddPatientPage)
+  },  {
+    path: 'site-selection',
+    loadComponent: () => import('./site-selection/site-selection.page').then( m => m.SiteSelectionPage)
   },
+
 ];

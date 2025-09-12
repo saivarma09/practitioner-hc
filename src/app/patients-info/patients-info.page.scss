@@ -1,0 +1,66 @@
+ion-toolbar {
+    padding: 1rem 0.75rem;
+}
+
+.skeleton-design {
+    border-bottom: 1px solid var(--ion-border-color);
+
+    .patient-skeleton-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50px;
+    }
+
+    .patient-skeleton-name {
+        height: 20px;
+    }
+
+}
+
+.skeleton-design:last-child {
+    border-bottom: none !important;
+}
+
+.profile-icon {
+    min-width: 28px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.patient-info {
+    border-bottom: 1px solid var(--ion-border-color);
+}
+
+.patient-info:last-child {
+    border-bottom: none !important;
+}
+
+
+.patient-deceased {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50px;
+    right: 0px;
+    top: -5px;
+    background: var(--ion-success-color);
+}
+
+
+.patient-deceased.isDeceased {
+    background: var(--ion-danger-color) !important;
+}
+
+
+ion-searchbar.custom {
+    --background: var(--ion-background-color) !important;
+    --color: var(--ion-primary-color) !important;
+    --placeholder-color: var(--ion-primary-color);
+    --border-radius: 9px;
+    --icon-color: var(--ion-primary-color);
+    border: 1px solid var(--ion-border-color);
+    min-height: auto !important;
+    padding: 0px !important;
+    border-radius: 8px;
+}

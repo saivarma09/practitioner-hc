@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -14,8 +14,10 @@ export interface SsoSession {
   providedIn: 'root'
 })
 export class SsoAuthenticationService {
-
-  constructor( private readonly http: HttpClient) { }
+  rawHttp: HttpClient;
+  constructor(private readonly http: HttpClient, private httpBackend: HttpBackend) {
+    this.rawHttp = new HttpClient(httpBackend);
+  }
 
   getTokenUsingParamCode(paramCode: string, clientId: string): Promise<any> {
     const pkceGeneratedCode = localStorage.getItem('pkceGeneratedCode');
@@ -28,10 +30,10 @@ export class SsoAuthenticationService {
       .set('redirect_uri', environment.healthcodeSSO_redirectUri)
       .set('client_id', clientId)
       .set('code_verifier', codeVerifier);
-      console.log(environment);
-      // alert(JSON.stringify(environment));
+    console.log(environment);
+    // alert(JSON.stringify(environment));
 
-    const observable$ = this.http.post<any>(`${environment.healthcodeSSO_host}/token`, null, { params }).pipe(
+    const observable$ = this.rawHttp.post<any>(`${environment.healthcodeSSO_host}/token`, null, { params }).pipe(
       map((data) => {
 
         const tokenObject: SsoSession = {
@@ -55,21 +57,21 @@ export class SsoAuthenticationService {
 
 
 
-    getUser(accessToken: string): Promise<any> {
+  getUser(accessToken: string): Promise<any> {
     const headers = this.getHeadersByToken(accessToken);
     return firstValueFrom(
-      this.http.get<any>(`${environment.healthcodeAccounts_host}/api/restricted/user`, { headers }).pipe(
+      this.rawHttp.get<any>(`${environment.healthcodeAccounts_host}/api/restricted/user`, { headers }).pipe(
         catchError((error => {
           console.error('Error fetching user data:', error);
           throw error;
-        }) )
+        }))
       )
     );
   }
 
 
 
-   private getHeadersByToken(token: string, siteId: string = ''): HttpHeaders {
+  private getHeadersByToken(token: string, siteId: string = ''): HttpHeaders {
 
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -79,7 +81,7 @@ export class SsoAuthenticationService {
   }
 
 
-  
+
 
 
 }
