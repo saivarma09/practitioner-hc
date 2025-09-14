@@ -82,10 +82,12 @@ export class ConfigurationService {
   }
 
   private async handleSsoAuthentication() {
-    const user = false;
+    const user = localStorage.getItem('ssoSession');
     console.log('Existing SSO session:', user);
     if (!user) {
       await this.generateSsoSession();
+    }else{
+      this.router.navigate(['/site-selection']);
     }
   }
 

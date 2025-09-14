@@ -6,18 +6,22 @@ import {
   HttpEvent,
   HttpErrorResponse,
   HttpResponse,
-  HttpHeaders
+  HttpHeaders,
+  HttpParams,
+  HttpClient
 } from '@angular/common/http';
 import { Observable, throwError, from, of } from 'rxjs';
-import { catchError, mergeMap } from 'rxjs/operators';
+import { catchError, mergeMap, switchMap } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
 import { Capacitor, CapacitorHttp } from '@capacitor/core';
 import { environment } from 'src/environments/environment';
+import { ConfigurationService } from '../core/services/configuration/configuration';
+import { SsoAuthenticationService } from '../core/services/sso-authentication/sso-authentication';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
 
-  constructor(private toastController: ToastController) { }
+  constructor(private toastController: ToastController, private configurationService: ConfigurationService, private http:HttpClient) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // 🔹 Fetch token & siteId (replace with Preferences/Storage in real apps)
@@ -118,6 +122,7 @@ export class HttpInterceptorService implements HttpInterceptor {
             break;
           case 401:
             errorMessage = 'Unauthorized - Please login again';
+            this.refreshLoginSession();
             break;
           case 403:
             errorMessage = 'Forbidden';
@@ -146,5 +151,65 @@ export class HttpInterceptorService implements HttpInterceptor {
       position: 'bottom'
     });
     await toast.present();
+  }
+
+
+  refreshLoginSession(): Observable<any> {
+
+    const pkceGeneratedCode = localStorage.getItem('pkceGeneratedCode');
+    const codeVerifier = pkceGeneratedCode ? JSON.parse(pkceGeneratedCode).verifier : '';
+    const sessionData = localStorage.getItem('ssoSession');
+    const sessionInfo = sessionData ? JSON.parse(sessionData) : null;
+
+
+
+    const params = new HttpParams()
+      .set('grant_type', 'refresh_token')
+      .set('refresh_token', sessionInfo.sessionData.refreshToken)
+      .set('audience', this.configurationService.clientId)
+      .set('code_verifier', codeVerifier);
+
+    const username = this.configurationService.clientId;
+
+    const authHeader = 'Basic ' + btoa(`${username}:`);
+
+
+    return this.getUpdatedTokenFromAccounts(params, authHeader)
+      .pipe(switchMap((refreshSession: any) => {
+        const updatedEpxSessionData: any = {
+          token: refreshSession.access_token,
+          refreshToken: refreshSession.refresh_token,
+          siteId: localStorage.getItem('site_id'),
+          idToken: refreshSession.id_token
+        }
+        localStorage.setItem('ssoSession', JSON.stringify({ sessionData: updatedEpxSessionData }));
+        // Notify other parts of the app about the refreshed session;
+        return of(refreshSession);
+      }),
+        catchError((err) => {
+          console.log(err);
+          this.handleErrorWhileRefreshingEpxSession();
+          return of();
+        })
+      );
+  }
+
+    getUpdatedTokenFromAccounts(payload: any, authHeader: any): Observable<any> {
+    // return this.http.post<any>(`${environment.healthcodeSSO_host}/token`, payload);
+    return this.http.post<any>(
+      `${environment.healthcodeSSO_host}/token`,
+      payload, {
+      headers: {
+        Authorization: authHeader,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+    )
+  }
+
+
+  handleErrorWhileRefreshingEpxSession() {
+    // this.router.navigate(['/session-error'], { queryParams: { errorType: SessionErrorType.SERVER_ERROR } });
+    // this.sessionService.sendCloseEventToEPX('sessionExpired');
   }
 }
