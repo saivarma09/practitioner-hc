@@ -12,10 +12,18 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   constructor(
-    private router: Router, 
+    private router: Router,
     private configurationService: ConfigurationService
   ) {
-    this.initializeDeepLinkHandler();
+    // const user = localStorage.getItem('ssoSession');
+    // console.log('Existing SSO session:', user);
+    // if (!user) {
+    //   this.initializeDeepLinkHandler();
+    //   // await this.generateSsoSession();
+    // } else {
+    //   this.router.navigate(['/site-selection']);
+    // }
+     this.initializeDeepLinkHandler();
   }
 
   initializeDeepLinkHandler() {
@@ -75,12 +83,12 @@ export class AppComponent {
                 }
               }, 300);
             }
-          } 
+          }
           // Handle authentication errors
           else if (routePath === '/login' && searchParams.get('error')) {
             const error = searchParams.get('error');
             const errorDescription = searchParams.get('error_description');
-            
+
             console.log('Authentication error:', error, errorDescription);
 
             // Close browser safely
@@ -94,7 +102,7 @@ export class AppComponent {
             if (error === 'login_required') {
               console.log('Login required, switching to interactive login');
               this.configurationService.prompt = 'login';
-              
+
               // Add delay before reopening browser
               setTimeout(async () => {
                 try {
@@ -124,10 +132,10 @@ export class AppComponent {
 
   private handleAuthenticationError(error?: any, description?: any) {
     console.error('Authentication error occurred:', error, description);
-    
+
     // Reset configuration service state
     this.configurationService.prompt = 'none';
-    
+
     // Navigate to appropriate error page or retry login
     // You might want to show an error message to the user here
     setTimeout(() => {
@@ -138,5 +146,5 @@ export class AppComponent {
   }
 
 
-  
+
 }

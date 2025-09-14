@@ -82,13 +82,14 @@ export class ConfigurationService {
   }
 
   private async handleSsoAuthentication() {
-    const user = localStorage.getItem('ssoSession');
-    console.log('Existing SSO session:', user);
-    if (!user) {
-      await this.generateSsoSession();
-    }else{
-      this.router.navigate(['/site-selection']);
-    }
+await this.generateSsoSession();
+    // const user = localStorage.getItem('ssoSession');
+    // console.log('Existing SSO session:', user);
+    // if (!user) {
+    //   await this.generateSsoSession();
+    // } else {
+    //   this.router.navigate(['/site-selection']);
+    // }
   }
 
   public async generateSsoSession(paramCodeValue?: string | null): Promise<boolean> {
@@ -119,7 +120,6 @@ export class ConfigurationService {
             };
             localStorage.setItem('ssoSession', JSON.stringify(ssoSession));
             console.log('SSO session created successfully:', ssoSession);
-
             // Reset prompt after successful login
             this.prompt = 'none';
 
