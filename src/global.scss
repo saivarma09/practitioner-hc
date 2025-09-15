@@ -95,17 +95,20 @@ ion-row {
 // }
 
 @supports (padding-top: env(safe-area-inset-top)) {
-  html {
-    --ion-safe-area-top: env(safe-area-inset-top);
-    --ion-safe-area-bottom: env(safe-area-inset-bottom);
-    --ion-safe-area-left: env(safe-area-inset-left);
-    --ion-safe-area-right: env(safe-area-inset-right);
-  }
+    html {
+        --ion-safe-area-top: env(safe-area-inset-top);
+        --ion-safe-area-bottom: env(safe-area-inset-bottom);
+        --ion-safe-area-left: env(safe-area-inset-left);
+        --ion-safe-area-right: env(safe-area-inset-right);
+    }
 }
 
 /* If you need 16px minimum + safe area */
 .md ion-header ion-toolbar:first-of-type {
-  padding-top: max(3rem, var(--ion-safe-area-top, 0)) !important;
+    padding-top: max(3rem, var(--ion-safe-area-top, 0)) !important;
+}
+.md ion-modal ion-header ion-toolbar:first-of-type {
+    padding-top: max(1rem, var(--ion-safe-area-top, 0)) !important;
 }
 
 
@@ -145,52 +148,52 @@ ion-row {
 
 /* 24px → 32px */
 .fs-6 {
-  font-size: clamp(1.5rem, 2.5vw, 2rem) !important;
+    font-size: clamp(1.5rem, 2.5vw, 2rem) !important;
 }
 
 /* 26px → 34px */
 .fs-7 {
-  font-size: clamp(1.625rem, 2.7vw, 2.125rem) !important;
+    font-size: clamp(1.625rem, 2.7vw, 2.125rem) !important;
 }
 
 /* 28px → 36px */
 .fs-8 {
-  font-size: clamp(1.75rem, 2.9vw, 2.25rem) !important;
+    font-size: clamp(1.75rem, 2.9vw, 2.25rem) !important;
 }
 
 /* 30px → 38px */
 .fs-9 {
-  font-size: clamp(1.875rem, 3vw, 2.375rem) !important;
+    font-size: clamp(1.875rem, 3vw, 2.375rem) !important;
 }
 
 /* 32px → 40px */
 .fs-10 {
-  font-size: clamp(2rem, 3.2vw, 2.5rem) !important;
+    font-size: clamp(2rem, 3.2vw, 2.5rem) !important;
 }
 
 /* 34px → 42px */
 .fs-11 {
-  font-size: clamp(2.125rem, 3.4vw, 2.625rem) !important;
+    font-size: clamp(2.125rem, 3.4vw, 2.625rem) !important;
 }
 
 /* 36px → 44px */
 .fs-12 {
-  font-size: clamp(2.25rem, 3.6vw, 2.75rem) !important;
+    font-size: clamp(2.25rem, 3.6vw, 2.75rem) !important;
 }
 
 /* 38px → 46px */
 .fs-13 {
-  font-size: clamp(2.375rem, 3.8vw, 2.875rem) !important;
+    font-size: clamp(2.375rem, 3.8vw, 2.875rem) !important;
 }
 
 /* 40px → 48px */
 .fs-14 {
-  font-size: clamp(2.5rem, 4vw, 3rem) !important;
+    font-size: clamp(2.5rem, 4vw, 3rem) !important;
 }
 
 /* 42px → 50px */
 .fs-15 {
-  font-size: clamp(2.625rem, 4.2vw, 3.125rem) !important;
+    font-size: clamp(2.625rem, 4.2vw, 3.125rem) !important;
 }
 
 
@@ -540,65 +543,173 @@ ion-row {
 }
 
 
-.flex-1{
+.flex-1 {
     flex: 1;
 }
 
 
-.secondary-text{
+.secondary-text {
     color: var(--ion-secondary-text-color);
 }
 
 /* === Padding Utilities === */
 
 /* All sides */
-.p-0-5 { padding: 0.5rem !important; }
-.p-1   { padding: 1rem !important; }
-.p-1-5 { padding: 1.5rem !important; }
-.p-2   { padding: 2rem !important; }
-.p-3   { padding: 3rem !important; }
+.p-0-5 {
+    padding: 0.5rem !important;
+}
+
+.p-1 {
+    padding: 1rem !important;
+}
+
+.p-1-5 {
+    padding: 1.5rem !important;
+}
+
+.p-2 {
+    padding: 2rem !important;
+}
+
+.p-3 {
+    padding: 3rem !important;
+}
 
 /* Top */
-.pt-0-5 { padding-top: 0.5rem !important; }
-.pt-1   { padding-top: 1rem !important; }
-.pt-1-5 { padding-top: 1.5rem !important; }
-.pt-2   { padding-top: 2rem !important; }
-.pt-3   { padding-top: 3rem !important; }
+.pt-0-5 {
+    padding-top: 0.5rem !important;
+}
+
+.pt-1 {
+    padding-top: 1rem !important;
+}
+
+.pt-1-5 {
+    padding-top: 1.5rem !important;
+}
+
+.pt-2 {
+    padding-top: 2rem !important;
+}
+
+.pt-3 {
+    padding-top: 3rem !important;
+}
 
 /* Bottom */
-.pb-0-5 { padding-bottom: 0.5rem !important; }
-.pb-1   { padding-bottom: 1rem !important; }
-.pb-1-5 { padding-bottom: 1.5rem !important; }
-.pb-2   { padding-bottom: 2rem !important; }
-.pb-3   { padding-bottom: 3rem !important; }
+.pb-0-5 {
+    padding-bottom: 0.5rem !important;
+}
+
+.pb-1 {
+    padding-bottom: 1rem !important;
+}
+
+.pb-1-5 {
+    padding-bottom: 1.5rem !important;
+}
+
+.pb-2 {
+    padding-bottom: 2rem !important;
+}
+
+.pb-3 {
+    padding-bottom: 3rem !important;
+}
 
 /* Left */
-.pl-0-5 { padding-left: 0.5rem !important; }
-.pl-1   { padding-left: 1rem !important; }
-.pl-1-5 { padding-left: 1.5rem !important; }
-.pl-2   { padding-left: 2rem !important; }
-.pl-3   { padding-left: 3rem !important; }
+.pl-0-5 {
+    padding-left: 0.5rem !important;
+}
+
+.pl-1 {
+    padding-left: 1rem !important;
+}
+
+.pl-1-5 {
+    padding-left: 1.5rem !important;
+}
+
+.pl-2 {
+    padding-left: 2rem !important;
+}
+
+.pl-3 {
+    padding-left: 3rem !important;
+}
 
 /* Right */
-.pr-0-5 { padding-right: 0.5rem !important; }
-.pr-1   { padding-right: 1rem !important; }
-.pr-1-5 { padding-right: 1.5rem !important; }
-.pr-2   { padding-right: 2rem !important; }
-.pr-3   { padding-right: 3rem !important; }
+.pr-0-5 {
+    padding-right: 0.5rem !important;
+}
+
+.pr-1 {
+    padding-right: 1rem !important;
+}
+
+.pr-1-5 {
+    padding-right: 1.5rem !important;
+}
+
+.pr-2 {
+    padding-right: 2rem !important;
+}
+
+.pr-3 {
+    padding-right: 3rem !important;
+}
 
 /* X-axis (left + right) */
-.px-0-5 { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
-.px-1   { padding-left: 1rem !important; padding-right: 1rem !important; }
-.px-1-5 { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
-.px-2   { padding-left: 2rem !important; padding-right: 2rem !important; }
-.px-3   { padding-left: 3rem !important; padding-right: 3rem !important; }
+.px-0-5 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+}
+
+.px-1 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+.px-1-5 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+}
+
+.px-2 {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+}
+
+.px-3 {
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+}
 
 /* Y-axis (top + bottom) */
-.py-0-5 { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; }
-.py-1   { padding-top: 1rem !important; padding-bottom: 1rem !important; }
-.py-1-5 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
-.py-2   { padding-top: 2rem !important; padding-bottom: 2rem !important; }
-.py-3   { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+.py-0-5 {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+}
+
+.py-1 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+.py-1-5 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+
+.py-2 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+}
+
+.py-3 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
 
 
 
@@ -606,41 +717,164 @@ ion-row {
 
 /* iPad Landscape (bigger scaling) */
 @media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
-  .fs-1 { font-size: clamp(0.75rem, 1.2vw, 1rem) !important; }
-  .fs-2 { font-size: clamp(0.875rem, 1.4vw, 1.125rem) !important; }
-  .fs-3 { font-size: clamp(1rem, 1.7vw, 1.25rem) !important; }
-  .fs-4 { font-size: clamp(1.125rem, 2vw, 1.5rem) !important; }
-  .fs-5 { font-size: clamp(1.25rem, 2.3vw, 1.75rem) !important; }
-  .fs-6 { font-size: clamp(1.5rem, 2.8vw, 2rem) !important; }
-  .fs-7 { font-size: clamp(1.625rem, 3vw, 2.125rem) !important; }
-  .fs-8 { font-size: clamp(1.75rem, 3.2vw, 2.25rem) !important; }
-  .fs-9 { font-size: clamp(1.875rem, 3.4vw, 2.375rem) !important; }
-  .fs-10 { font-size: clamp(2rem, 3.6vw, 2.5rem) !important; }
-  .fs-11 { font-size: clamp(2.125rem, 3.8vw, 2.625rem) !important; }
-  .fs-12 { font-size: clamp(2.25rem, 4vw, 2.75rem) !important; }
-  .fs-13 { font-size: clamp(2.375rem, 4.2vw, 2.875rem) !important; }
-  .fs-14 { font-size: clamp(2.5rem, 4.4vw, 3rem) !important; }
-  .fs-15 { font-size: clamp(2.625rem, 4.6vw, 3.125rem) !important; }
+    .fs-1 {
+        font-size: clamp(0.75rem, 1.2vw, 1rem) !important;
+    }
+
+    .fs-2 {
+        font-size: clamp(0.875rem, 1.4vw, 1.125rem) !important;
+    }
+
+    .fs-3 {
+        font-size: clamp(1rem, 1.7vw, 1.25rem) !important;
+    }
+
+    .fs-4 {
+        font-size: clamp(1.125rem, 2vw, 1.5rem) !important;
+    }
+
+    .fs-5 {
+        font-size: clamp(1.25rem, 2.3vw, 1.75rem) !important;
+    }
+
+    .fs-6 {
+        font-size: clamp(1.5rem, 2.8vw, 2rem) !important;
+    }
+
+    .fs-7 {
+        font-size: clamp(1.625rem, 3vw, 2.125rem) !important;
+    }
+
+    .fs-8 {
+        font-size: clamp(1.75rem, 3.2vw, 2.25rem) !important;
+    }
+
+    .fs-9 {
+        font-size: clamp(1.875rem, 3.4vw, 2.375rem) !important;
+    }
+
+    .fs-10 {
+        font-size: clamp(2rem, 3.6vw, 2.5rem) !important;
+    }
+
+    .fs-11 {
+        font-size: clamp(2.125rem, 3.8vw, 2.625rem) !important;
+    }
+
+    .fs-12 {
+        font-size: clamp(2.25rem, 4vw, 2.75rem) !important;
+    }
+
+    .fs-13 {
+        font-size: clamp(2.375rem, 4.2vw, 2.875rem) !important;
+    }
+
+    .fs-14 {
+        font-size: clamp(2.5rem, 4.4vw, 3rem) !important;
+    }
+
+    .fs-15 {
+        font-size: clamp(2.625rem, 4.6vw, 3.125rem) !important;
+    }
 }
 
 ion-action-sheet {
-  --max-height: 80vh !important;
-  --height:100% !important;
-  --border-radius: 16px;
-  align-items: flex-end; /* ensures it sticks to bottom */
+    --max-height: 80vh !important;
+    --height: 100% !important;
+    --border-radius: 16px;
+    align-items: flex-end;
+    /* ensures it sticks to bottom */
 }
 
-button[disabled]{
+button[disabled] {
     opacity: 0.3 !important;
 }
 
 
-.word-break{
+.word-break {
     word-break: break-word;
 }
 
-.position-relative{
+.position-relative {
     position: relative;
 }
 
 
+.input-main-class {
+    border: 1px solid var(--ion-border-color) !important;
+    border-radius: 0.5rem;
+}
+.input-main-class.ion-touched.ion-invalid {
+    border: 1px solid var(--ion-color-danger) !important;
+}
+
+.input-main-class::part(container) {
+    width: 100vh;
+}
+
+ion-modal::part(content) {
+    border-radius: 1rem 1rem 0 0;
+}
+
+.fa-trash{
+    color: var(--ion-color-danger);
+}
+
+.select-highlight, .input-highlight{
+    display: none !important;
+}
+
+/* Add this CSS to your add-patients.page.scss file to hide select highlights */
+
+/* Hide select highlight completely */
+.select-highlight,
+ion-select .select-highlight,
+.ion-select .select-highlight {
+  display: none !important;
+}
+
+/* Remove highlight from ion-select */
+ion-select {
+  --highlight-height: 0px;
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent;
+  --highlight-color-invalid: transparent;
+}
+
+/* Remove any focus highlight effects */
+ion-select.ion-focused {
+  --highlight-color-focused: transparent;
+}
+
+/* Remove highlight for your custom input class */
+.input-main-class {
+  --highlight-height: 0;
+}
+
+.input-main-class.ion-focused {
+  --highlight-color-focused: transparent;
+}
+
+/* Global override to ensure no select highlights anywhere */
+ion-select,
+ion-select.in-item,
+.ion-page ion-select,
+ion-content ion-select {
+  --highlight-height: 0px !important;
+  --highlight-color-focused: transparent !important;
+  --highlight-color-valid: transparent !important;
+  --highlight-color-invalid: transparent !important;
+}
+
+
+ion-toggle {
+  --track-background: var(--ion-secondary-color);
+//   --track-background-checked: #ddd;
+//   --handle-background: var(--ion-secondary-text-color);
+// //   --handle-background-checked: var(--ion-btn-primary-color);
+}
+
+// ion-toggle::part(track) {
+// background: var(--ion-secondary-color);
+
+// }

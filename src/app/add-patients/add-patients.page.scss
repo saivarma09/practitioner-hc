@@ -1,0 +1,55 @@
+.primary-button{
+    background: var(--ion-btn-primary-color);
+    color: var(--ion-white-color);
+    border: none;
+    border-radius: var(--ion-border-radius);
+}
+
+.secondary-button{
+    background: transparent;
+    color: var(--ion-primary-color);
+    border: 1px solid var(--ion-border-color);
+    border-radius: var(--ion-border-radius);
+}
+
+.primary-indicatior{
+    background: var(--ion-success-color);
+    color: var(--ion-white-color);
+    padding: 0.3rem 0.5rem;
+    border-radius: 50px;
+}
+
+.list-container{
+    border-bottom: 1px solid var(--ion-border-color);
+}
+
+
+.preferred-indicatior{
+    background: var(  --ion-btn-primary-color);
+    color: var(--ion-white-color);
+    padding: 0.3rem 0.5rem;
+    border-radius: 50px;
+}
+
+
+.background-container{
+    background: var(--ion-secondary-color-opacity);
+    border-radius: 1rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.title{
+    font-family: 'poppins', sans-serif !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+.hidden-border .list-container:last-child{
+    border-bottom: none;
+}
+
+
+ion-toolbar {
+    padding: 1rem 0.75rem;
+}
