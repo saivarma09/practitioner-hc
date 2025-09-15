@@ -2,6 +2,7 @@
   --ion-primary-color: #000000;
   --ion-background-color: #ffffff;
   --ion-secondary-color: #EEEEEE;
+      --ion-secondary-color-opacity: #EEEEEE;
   --ion-secondary-text-color: #808080;
   --ion-login-image-color: #6b63ff;
   --ion-btn-primary-color: linear-gradient(180deg, rgba(6, 7, 8, 1) 0%, rgba(18, 13, 61, 1) 50%);
@@ -9,7 +10,7 @@
   --ion-white-color: #ffffff;
   --ion-black-color: #000000;
   --ion-dashboard-header: #120d3d;
-  --ion-success-color:#00B106;
+  --ion-success-color:#008004;
   --ion-progress-color:#DA9602;
   --ion-danger-color:#FF0000;
   --ion-border-color:#d2d2d2;
@@ -32,6 +33,7 @@
 
     --ion-background-color-rgb: 36, 36, 36 !important; 
     --ion-secondary-color: #727272;
+    --ion-secondary-color-opacity: #7272724f;
     --ion-login-image-color: #ffffff;
     --ion-btn-primary-color: #727272;
     --ion-dashboard-header: #727272;

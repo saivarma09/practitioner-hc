@@ -23,11 +23,12 @@ export const routes: Routes = [
     loadComponent: () => import('./patients-info/patients-info.page').then( m => m.PatientsInfoPage)
   },
   {
-    path: 'add-patient',
-    loadComponent: () => import('./add-patient/add-patient.page').then( m => m.AddPatientPage)
-  },  {
     path: 'site-selection',
     loadComponent: () => import('./site-selection/site-selection.page').then( m => m.SiteSelectionPage)
+  },
+  {
+    path: 'add-patients',
+    loadComponent: () => import('./add-patients/add-patients.page').then( m => m.AddPatientsPage)
   },
 
 ];

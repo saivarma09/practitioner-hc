@@ -45,4 +45,8 @@ export class DashboardPage implements OnInit {
   patientInfo(){
     this.router.navigate(['/patients-info'])
   }
+
+  addPatient(){
+    this.router.navigate(['/add-patients'])
+  }
 }
