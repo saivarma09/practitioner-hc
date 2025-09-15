@@ -5,7 +5,7 @@ ion-toolbar {
 .skeleton-design {
     border-bottom: 1px solid var(--ion-border-color);
 
-    .patient-skeleton-icon, svg {
+    .patient-skeleton-icon {
         width: 40px;
         height: 40px;
         border-radius: 50px;
@@ -21,7 +21,10 @@ ion-toolbar {
     border-bottom: none !important;
 }
 
-.profile-icon {
+.profile-icon{
+    svg{
+        min-width: 28px;
+    }
     min-width: 28px;
     display: flex;
     justify-content: center;
