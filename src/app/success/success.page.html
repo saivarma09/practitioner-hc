@@ -1,0 +1,18 @@
+<ion-content [fullscreen]="true" class="ion-padding ion-text-center">
+  <div  class="ion-display-flex flex-column gap-3 align-center">
+  <div class="ion-padding ion-display-flex flex-column gap-2 pt-3 align-center">
+    <div class="fs-6 fw-700">
+      Hurray!
+    </div>
+    <div class="fs-2">{{successInfo.successMessage}}</div>
+  </div>
+  <div>
+    <img src="assets/icon/success.svg" class="success-image vw-50" />
+  </div>
+  <div class="ion-display-flex flex-column gap-1">
+    @if(successInfo?.secondaryButton?.label){
+    <button class="ion-padding secondary-button fs-3" (click)="onSecondaryButtonClick(successInfo.secondaryButton.link)">{{successInfo.secondaryButton.label}}</button>}
+    <button class="ion-padding primary-button fs-3" (click)="onPrimaryButtonClick()">Go to Dashboard</button>
+  </div>
+  </div>
+</ion-content>

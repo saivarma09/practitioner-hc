@@ -1,0 +1,13 @@
+.primary-button {
+    background: var(--ion-btn-primary-color);
+    color: var(--ion-white-color);
+    border: none;
+    border-radius: var(--ion-border-radius);
+}
+
+.secondary-button {
+    background: transparent;
+    color: var(--ion-primary-color);
+    border: 1px solid var(--ion-border-color);
+    border-radius: var(--ion-border-radius);
+}

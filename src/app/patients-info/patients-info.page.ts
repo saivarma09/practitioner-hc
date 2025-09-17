@@ -612,4 +612,9 @@ export class PatientsInfoPage {
   backRoute(){
     this.navController.back();
   }
+
+
+  patientDetails(patientDetails:any){
+    this.navController.navigateForward(['patient-details', patientDetails.id])
+  }
 }

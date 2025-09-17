@@ -1,0 +1,27 @@
+.dot{
+    width: 6px;
+    height: 6px;
+    border-radius: 50px;
+    background: var(--ion-secondary-text-color);
+}
+
+
+.cancel{
+    color: var(--ion-danger-color) !important;
+}
+
+.completed{
+    color: var(--ion-success-color) !important;
+}
+
+.netural{
+    color: var(--ion-progress-color);
+}
+
+.border-bottom{
+    border-bottom: 1px solid var(--ion-border-color);
+}
+
+.hidden-border .border-bottom:first-child{
+    border: none !important;
+}

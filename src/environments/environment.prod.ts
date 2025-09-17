@@ -5,5 +5,6 @@ export const environment = {
     healthcodeAccounts_host: "https://accounts.uat.healthcode.co.uk",
     pracAppClientId: "bcon",
     serverUrl: 'https://bcon.is.ui.healthcode.co.uk/bcon-api-1.0/api/',
-    apiUrl: 'https://api.epractice.patient.uat.healthcode.co.uk/api'
+    apiUrl: 'https://api.epractice.patient.uat.healthcode.co.uk/api',
+    appointmentUrl: 'https://api.epractice.uat.healthcode.co.uk/api'
 };

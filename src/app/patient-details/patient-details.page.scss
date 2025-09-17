@@ -1,0 +1,19 @@
+
+.patient-icon{
+    border: 1px solid var(--ion-primary-color);
+    width: 52px;
+    height: 52px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg{
+        width: 26px;
+        height: 26px;
+    }
+}
+
+
+.selected-option{
+    border-bottom: 2px solid var(--ion-primary-color);
+}

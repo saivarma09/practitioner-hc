@@ -778,6 +778,62 @@ ion-row {
     }
 }
 
+
+/* Overflow common classes */
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-scroll {
+  overflow: scroll;
+}
+
+.overflow-visible {
+  overflow: visible;
+}
+
+/* Direction specific */
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+
+.position-static {
+  position: static;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.position-fixed {
+  position: fixed;
+}
+
+.position-sticky {
+  position: sticky;
+}
+
 ion-action-sheet {
     --max-height: 80vh !important;
     --height: 100% !important;
@@ -878,3 +934,10 @@ ion-toggle {
 // background: var(--ion-secondary-color);
 
 // }
+
+
+.background-footer{
+    background: var(--ion-background-color) !important;
+}
+
+

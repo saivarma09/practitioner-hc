@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar class="px-1 py-0-5">
     <div class="ion-display-flex align-center gap-0-75 fs-4" (click)="backRoute()">
       <i class="fa-light fa-chevron-left"></i>
       <div>Patients</div>
@@ -22,7 +22,7 @@
         <ion-skeleton-text [animated]="true" class="patient-skeleton-name w-75"></ion-skeleton-text>
         <div class="ion-display-flex gap-0-5">
           <ion-skeleton-text [animated]="true" class="patient-skeleton-dob w-20"></ion-skeleton-text>
-          <div class="seperator">|</div>
+          <!-- <div class="seperator">|</div> -->
           <ion-skeleton-text [animated]="true" class="patient-skeleton-gender w-20"></ion-skeleton-text>
         </div>
       </div>
@@ -33,7 +33,7 @@
   <!-- Patient List -->
   <div class="ion-display-flex flex-column ion-padding">
     @for (patient of patients; track patient.id; let i = $index) {
-    <div class="ion-display-flex gap-1 align-center p-1 patient-info">
+    <div class="ion-display-flex gap-1 align-center p-1 patient-info" (click)="patientDetails(patient)">
       <div class="profile-icon position-relative"><svg viewBox="0 0 32 32" fill="none"
           xmlns="http://www.w3.org/2000/svg">
           <path

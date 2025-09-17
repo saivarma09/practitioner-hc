@@ -1,0 +1,14 @@
+<ion-datetime-button datetime="datetime" style="visibility: hidden;position: absolute;opacity: 0;">
+</ion-datetime-button>
+
+<div class="input-main-class px-1 ion-display-flex align-center" (click)="dateModal.present()">
+  <ion-input  [value]="dateControl.value | date:'dd-MM-yyyy'" readonly
+    [placeholder]="'Select Date'"></ion-input>
+  <i class="fa-light fa-calendar" slot="end"></i>
+</div>
+<ion-modal [keepContentsMounted]="true" #dateModal>
+  <ng-template>
+    <ion-datetime id="datetime" presentation="date" [showDefaultButtons]="true" [preferWheel]="true"
+      [formControl]="dateControl" [max]="maxDate" (ionChange)="closeModel()"></ion-datetime>
+  </ng-template>
+</ion-modal>

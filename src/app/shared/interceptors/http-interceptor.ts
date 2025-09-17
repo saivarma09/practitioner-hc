@@ -69,7 +69,8 @@ export class HttpInterceptorService implements HttpInterceptor {
     return req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,
-        'SU-siteId': siteId
+        'SU-siteId': siteId,
+        'content-type': 'application/json'
       }
     });
   }

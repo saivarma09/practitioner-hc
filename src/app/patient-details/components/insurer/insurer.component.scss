@@ -1,0 +1,25 @@
+.primary{
+    color: var(--ion-success-color);
+    
+}
+
+.fa-badge-check{
+    top: -2px;
+    right: -15px;
+}
+
+.dot{
+    width: 6px;
+    height: 6px;
+    border-radius: 50px;
+    background: var(--ion-secondary-text-color);
+}
+
+
+.border-bottom{
+    border-bottom: 1px solid var(--ion-border-color);
+}
+
+.hidden-border .border-bottom:last-child{
+    border: none !important;
+}

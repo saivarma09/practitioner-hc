@@ -1,0 +1,36 @@
+@if(appointments.length > 0){
+<div class="ion-display-flex flex-column-reverse hidden-border py-1">
+  @for(appointment of appointments; track appointment.id) {
+  <div class="ion-display-flex flex-column gap-0-5 border-bottom py-1">
+    <div class="ion-display-flex gap-0-5 align-center">
+      <div><i class="fa-light fs-3 fa-user-doctor"></i></div>
+      @for(participant of appointment.appointmentParticipant; track $index) {
+      @if(participant.participant.typeCode === 'S'){
+      <div class="fs-2">{{participant.participant.name}}</div>
+      }}
+    </div>
+    <div class="fs-2 secondary-text">{{appointment.appointmentType.description}}</div>
+    <div class="fs-2 ion-display-flex gap-0-5 align-center secondary-text"><span>{{appointment.startDate |
+        date:'short'}}</span> <span class="dot"></span><span class="netural"
+        [ngClass]="{'completed' : appointment.appointmentStatus.id === 'O','cancel' : appointment.appointmentStatus.id === 'X'}">{{appointment.appointmentStatus.description}}</span>
+    </div>
+  </div>
+  }
+</div>}
+@else{
+<div class="ion-display-flex flex-column-reverse hidden-border py-1">
+  <div class="ion-display-flex flex-column gap-0-5 border-bottom py-1" *ngFor="let i of [1,2,3]">
+    <div class="ion-display-flex gap-0-5 align-center">
+      <ion-skeleton-text animated style="width:24px; height:24px; border-radius:50px"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width:100%;height:20px"></ion-skeleton-text>
+    </div>
+
+    <ion-skeleton-text animated style="width:80%"></ion-skeleton-text>
+
+    <div class="ion-display-flex gap-0-5 align-center">
+      <ion-skeleton-text animated style="width:40%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width:30%"></ion-skeleton-text>
+    </div>
+  </div>
+</div>
+}
