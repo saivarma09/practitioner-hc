@@ -20,5 +20,39 @@
 </div>
 
 <ion-modal trigger="insurer-model" [initialBreakpoint]="0.5" [isOpen]="openInsurerModel">
+  <form>
+    <div class="ion-display-flex flex-column gap-0-5">
+      <label for="title">Title</label>
+      <ion-select placeholder="Select a title" interface="action-sheet" id="title" name="title" formControlName="title"
+        class="input-main-class px-1 ">
 
+        @for(title of titles; track title.id) {
+        <ion-select-option [value]="title">{{title.description}}</ion-select-option>
+        }
+      </ion-select>
+
+    </div>
+    <div class="ion-display-flex flex-column gap-0-5">
+      <label for="firstName">First name *</label>
+      <ion-input id="firstName" placeholder="Enter first name" name="firstName" type="text" formControlName="firstName"
+        class="input-main-class px-1"></ion-input>
+    </div>
+    <div class="ion-display-flex flex-column gap-0-5">
+      <label for="firstName">First name *</label>
+      <ion-input id="firstName" placeholder="Enter first name" name="firstName" type="text" formControlName="firstName"
+        class="input-main-class px-1"></ion-input>
+    </div>
+    <div class="ion-display-flex flex-column gap-0-5">
+      <label for="date">Date of birth</label>
+      <app-date-picker [dateControl]="patientDetailsForm.get('dob')"></app-date-picker>
+    </div>
+    <div class="ion-display-flex align-center gap-0-5">
+      <ion-toggle aria-label="Dark toggle" formControlName="dontChase"></ion-toggle>
+      <label for="languages">Don't chase</label>
+    </div>
+    <div class="px-1 ion-display-flex justify-end align-center">
+      <button class="ion-padding primary-button" (click)="addIdentifier()"
+        [disabled]="identifierForm.invalid">Add</button>
+    </div>
+  </form>
 </ion-modal>

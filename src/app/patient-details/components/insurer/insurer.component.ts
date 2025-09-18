@@ -2,13 +2,15 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PatientInsurer, PatientInsurerResponse } from '../../models/insurer';
 import { PatientService } from '../../service/patient/patient-service';
 import { DatePipe } from '@angular/common';
-import { IonModal } from '@ionic/angular/standalone';
+import { IonModal, IonSelect, IonToggle } from '@ionic/angular/standalone';
+import { FORM_MODULES } from 'src/app/shared/imports/imports';
+import { DatePickerComponent } from 'src/app/shared/components/date-picker/date-picker.component';
 
 @Component({
   selector: 'app-insurer',
   templateUrl: './insurer.component.html',
   styleUrls: ['./insurer.component.scss'],
-  imports:[DatePipe, IonModal]
+  imports:[DatePipe, IonModal, IonSelect, FORM_MODULES, DatePickerComponent, IonToggle]
 })
 export class InsurerComponent implements OnInit {
   insurerResponse: PatientInsurerResponse = {} as PatientInsurerResponse;
