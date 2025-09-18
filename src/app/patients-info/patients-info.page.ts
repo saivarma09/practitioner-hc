@@ -610,7 +610,7 @@ export class PatientsInfoPage {
 
 
   backRoute(){
-    this.navController.back();
+    this.navController.navigateBack(['dashboard']);
   }
 
 

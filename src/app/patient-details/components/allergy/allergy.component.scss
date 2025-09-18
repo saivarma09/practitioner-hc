@@ -1,0 +1,11 @@
+ion-item::part(native){
+padding-left: 0px !important;
+}
+
+ion-list ion-item:last-child{
+    --border-color:transparent !important;
+}
+
+ion-list{
+        --background: var(--ion-background-color);
+}

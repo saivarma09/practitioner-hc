@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar, NavController } from '@ionic/angular/standalone';
@@ -7,15 +7,17 @@ import { AppointmentsComponent } from './components/appointments/appointments.co
 import { PatientService } from './service/patient/patient-service';
 import { ActivatedRoute } from '@angular/router';
 import { InsurerComponent } from './components/insurer/insurer.component';
+import { AllergyComponent } from './components/allergy/allergy.component';
 
 @Component({
   selector: 'app-patient-details',
   templateUrl: './patient-details.page.html',
   styleUrls: ['./patient-details.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, DatePipe, IonTabs, IonTabButton, IonTabBar, AppointmentsComponent, InsurerComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, DatePipe, IonTabs, IonTabButton, IonTabBar, AppointmentsComponent, InsurerComponent, AllergyComponent]
 })
 export class PatientDetailsPage implements OnInit {
+  @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef<HTMLDivElement>;
   strokeColor: string = 'var(--ion-primary-color)';
   patientDetails: PatientData = {} as PatientData;
   patientOptions = [
@@ -24,7 +26,7 @@ export class PatientDetailsPage implements OnInit {
     { value: 'insurer', label: 'Insurer', status: false },
     { value: 'allergies', label: 'Allergies', status: false },
   ];
-  selectOption: string = 'insurer';
+  selectOption: string = 'allergies';
   patientId:string='';
 
   constructor(private navController: NavController, private patientService: PatientService, private route: ActivatedRoute, private cdr:ChangeDetectorRef) {
@@ -235,5 +237,37 @@ export class PatientDetailsPage implements OnInit {
 
   goBack() {
     this.navController.navigateBack('/patients-info');
+  }
+
+
+  
+  selectOptionHandler(option: any, el: HTMLElement) {
+    this.selectOption = option.value;
+
+    const container = this.scrollContainer.nativeElement;
+    const containerRect = container.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+
+    // Distance of element from container
+    const offset = elRect.left - containerRect.left;
+    // Center position = element center - container half width
+    const scrollTo = offset - (container.offsetWidth / 2 - elRect.width / 2);
+
+    container.scrollBy({ left: scrollTo, behavior: 'smooth' });
+    this.cdr.detectChanges();
+  }
+
+
+
+  scrollLeft() {
+    const container = this.scrollContainer.nativeElement;
+    const step = container.offsetWidth; // visible width
+    container.scrollBy({ left: -step, behavior: 'smooth' });
+  }
+
+  scrollRight() {
+    const container = this.scrollContainer.nativeElement;
+    const step = container.offsetWidth; // visible width
+    container.scrollBy({ left: step, behavior: 'smooth' });
   }
 }

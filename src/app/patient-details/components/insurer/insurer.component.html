@@ -1,3 +1,20 @@
+@if(skeletonEnable){
+<div class="hidden-border py-1">
+  <!-- Show while loading -->
+  <section class="ion-display-flex justify-between align-center ion-padding border-bottom" *ngFor="let i of [1,2,3]">
+    <div class="ion-display-flex gap-0-5 flex-column w-100">
+      <div class="ion-display-flex align-center gap-0-5 w-100">
+        <ion-skeleton-text animated style="width: 70%; height: 18px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60px; height: 18px;"></ion-skeleton-text>
+      </div>
+      <ion-skeleton-text animated style="width: 80px; height: 14px;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 100px; height: 14px;"></ion-skeleton-text>
+    </div>
+  </section>
+</div>}
+@else{
+
+@if(insurerInfo.length > 0){
 <div class="hidden-border py-1">
   @for(insurer of insurerInfo;track $index){
   <section class="ion-display-flex justify-between align-center ion-padding border-bottom">
@@ -10,49 +27,69 @@
     </div>
 
     <div class="ion-display-flex gap-1">
-      <i class="fa-light fa-pen-to-square fs-5" (click)="editInsurer(insurer);"></i>
+      <i class="fa-light fa-pen-to-square fs-5" (click)="editInsurer(insurer)"></i>
       <i class="fa-light fa-link-slash"></i>
     </div>
 
 
   </section>
   }
-</div>
+</div>}
+@else{
 
-<ion-modal trigger="insurer-model" [initialBreakpoint]="0.5" [isOpen]="openInsurerModel">
-  <form>
-    <div class="ion-display-flex flex-column gap-0-5">
-      <label for="title">Title</label>
-      <ion-select placeholder="Select a title" interface="action-sheet" id="title" name="title" formControlName="title"
-        class="input-main-class px-1 ">
 
-        @for(title of titles; track title.id) {
-        <ion-select-option [value]="title">{{title.description}}</ion-select-option>
-        }
-      </ion-select>
+<app-no-records message="No insurers found"></app-no-records>}
 
-    </div>
-    <div class="ion-display-flex flex-column gap-0-5">
-      <label for="firstName">First name *</label>
-      <ion-input id="firstName" placeholder="Enter first name" name="firstName" type="text" formControlName="firstName"
-        class="input-main-class px-1"></ion-input>
-    </div>
-    <div class="ion-display-flex flex-column gap-0-5">
-      <label for="firstName">First name *</label>
-      <ion-input id="firstName" placeholder="Enter first name" name="firstName" type="text" formControlName="firstName"
-        class="input-main-class px-1"></ion-input>
-    </div>
-    <div class="ion-display-flex flex-column gap-0-5">
-      <label for="date">Date of birth</label>
-      <app-date-picker [dateControl]="patientDetailsForm.get('dob')"></app-date-picker>
-    </div>
-    <div class="ion-display-flex align-center gap-0-5">
-      <ion-toggle aria-label="Dark toggle" formControlName="dontChase"></ion-toggle>
-      <label for="languages">Don't chase</label>
-    </div>
-    <div class="px-1 ion-display-flex justify-end align-center">
-      <button class="ion-padding primary-button" (click)="addIdentifier()"
-        [disabled]="identifierForm.invalid">Add</button>
-    </div>
-  </form>
+}
+
+
+
+<ion-modal #insurerModel [initialBreakpoint]="0.75">
+  <ng-template>
+    <ion-header class="ion-padding">
+      <ion-toolbar>
+        <div class="ion-display-flex align-center gap-0-75 fs-4">
+          <div class="flex-1">{{insurerType}} insurer</div>
+          <i class="fa-thin fa-xmark" (click)="insurerReset();insurerModel.dismiss()"></i>
+        </div>
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding" [fullscreen]="true">
+      <form [formGroup]="insurerForm" class="ion-display-flex flex-column gap-1">
+        <div class="ion-display-flex flex-column gap-0-5">
+          <label>Insurer</label>
+          <ion-select placeholder="Select a insurer" interface="action-sheet" formControlName="insurer"
+            [compareWith]="compareWithFn" class="input-main-class px-1 ">
+            @for(insurerOption of insurersOptions; track insurerOption.id) {
+            <ion-select-option [value]="insurerOption">{{insurerOption.name}}</ion-select-option>
+            }
+          </ion-select>
+
+        </div>
+        <div class="ion-display-flex flex-column gap-0-5">
+          <label for="membershipNumber">Membership number</label>
+          <ion-input id="membershipNumber" placeholder="Enter membership number" name="membershipNumber" type="text"
+            formControlName="membershipNumber" class="input-main-class px-1"></ion-input>
+        </div>
+        <div class="ion-display-flex flex-column gap-0-5">
+          <label for="scheme">Scheme</label>
+          <ion-input id="scheme" placeholder="Enter scheme" name="scheme" type="text" formControlName="scheme"
+            class="input-main-class px-1"></ion-input>
+        </div>
+        <div class="ion-display-flex flex-column gap-0-5">
+          <label for="date">Expiry date</label>
+          <app-date-picker [dateControl]="insurerForm.get('expiryDate')"></app-date-picker>
+        </div>
+        <div class="ion-display-flex align-center gap-0-5">
+          <ion-toggle id="primary" formControlName="primary"></ion-toggle>
+          <label for="primary">Primary</label>
+        </div>
+        <div class="px-1 ion-display-flex justify-end align-center">
+          <button class="ion-padding primary-button" (click)="addInsurer()"
+            [disabled]="insurerForm.invalid">{{insurerType === 'Add' ? 'Add' : 'Update'}}</button>
+        </div>
+      </form>
+    </ion-content>
+  </ng-template>
 </ion-modal>

@@ -23,3 +23,11 @@
 .hidden-border .border-bottom:last-child{
     border: none !important;
 }
+
+
+.primary-button{
+    background: var(--ion-btn-primary-color);
+    color: var(--ion-white-color);
+    border: none;
+    border-radius: var(--ion-border-radius);
+}

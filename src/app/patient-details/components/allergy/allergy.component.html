@@ -1,0 +1,35 @@
+<div>
+  <form [formGroup]="allergyForm">
+    <div class="ion-display-flex flex-column gap-0-5">
+      <label for="allergen">Allergen</label>
+      <div id="allergenModel">
+        <ion-input placeholder="Enter allergen" name="allergen" type="text" formControlName="allergen"
+          class="input-main-class px-1"></ion-input>
+      </div>
+    </div>
+  </form>
+</div>
+
+<ion-modal trigger="allergenModel" #allergenModel [initialBreakpoint]="0.75">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar class="px-1">
+        <div class="ion-display-flex align-center gap-0-75 fs-4">
+          <div class="flex-1">Select allergen</div>
+          <i class="fa-thin fa-xmark" (click)="allergenModel.dismiss()"></i>
+        </div>
+      </ion-toolbar>
+    </ion-header>
+
+  <ion-content class="ion-padding" [fullscreen]="true" scroll-y="true">
+  <ion-input type="text" [formControl]="allergenSearch" class="input-main-class px-1" placeholder="Type to search allergen">
+  </ion-input>
+  
+  @for(item of filteredItems; track item.code){
+    <div button (click)="selectItem(item)">
+      {{ item.allergen }}
+    </div>
+  }
+</ion-content>
+  </ng-template>
+</ion-modal>

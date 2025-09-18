@@ -1,12 +1,12 @@
 export interface PatientDemographicsResponse {
   data: PatientData;
   success: boolean;
-  resource: string;
+  resource: string; // "PatientDemographics"
 }
 
 export interface PatientData {
   id: string;
-  balanceDue: string | null;
+  balanceDue: string;
   lastEdited: string;
   status: string;
   isPatientLocked: boolean;
@@ -81,7 +81,7 @@ export interface Insurer {
   isESTV: boolean;
   isSynchronousME: boolean;
   description: string;
-  expiryDate: string;
+  expiryDate: string; // "DD/MM/YYYY"
   expired: boolean;
   isPrimary: boolean;
   enquireAboutMembershipNo: boolean;
