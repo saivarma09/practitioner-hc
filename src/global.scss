@@ -108,7 +108,7 @@ ion-row {
     padding-top: max(3rem, var(--ion-safe-area-top, 0)) !important;
 }
 .md ion-modal ion-header ion-toolbar:first-of-type {
-    padding-top: max(1rem, var(--ion-safe-area-top, 0)) !important;
+    padding-top: max(0rem, var(--ion-safe-area-top, 0)) !important;
 }
 
 
@@ -595,8 +595,20 @@ ion-row {
 .pt-3 {
     padding-top: 3rem !important;
 }
+.pt-4 {
+    padding-top: 3rem !important;
+}
+.pt-5 {
+    padding-top: 3rem !important;
+}
+.pt-6 {
+    padding-top: 3rem !important;
+}
 
 /* Bottom */
+.pb-0-25 {
+    padding-bottom: 0.25rem !important;
+}
 .pb-0-5 {
     padding-bottom: 0.5rem !important;
 }
@@ -832,6 +844,23 @@ ion-row {
 
 .position-sticky {
   position: sticky;
+}
+
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
 }
 
 ion-action-sheet {

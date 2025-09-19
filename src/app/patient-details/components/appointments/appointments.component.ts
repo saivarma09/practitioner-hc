@@ -27,7 +27,7 @@ export class AppointmentsComponent  implements OnInit {
             this.skeletonEnable = false;
             this.cdr.detectChanges();
         },
-        error:()=>{console.error('error when getting appoitment');this.skeletonEnable= false}
+        error:()=>{this.appointmentInfo;this.skeletonEnable= false}
     });
 
     console.log(this.patientId);

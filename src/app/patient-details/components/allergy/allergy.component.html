@@ -1,35 +1,146 @@
-<div>
-  <form [formGroup]="allergyForm">
-    <div class="ion-display-flex flex-column gap-0-5">
-      <label for="allergen">Allergen</label>
-      <div id="allergenModel">
-        <ion-input placeholder="Enter allergen" name="allergen" type="text" formControlName="allergen"
-          class="input-main-class px-1"></ion-input>
+@if(patientAllergysSkeletonEnable){
+<div class="hidden-border">
+  @for (i of [1,2,3]; track $index) {
+    <div class="ion-display-flex justify-between align-center border-bottom p-1">
+      <div class="ion-display-flex flex-column gap-0-25 w-100">
+        <div class="ion-display-flex gap-0-5 fs-3 align-center">
+          <ion-skeleton-text animated style="width: 60%; height: 16px;"></ion-skeleton-text>
+        </div>
+        <ion-skeleton-text animated style="width: 80%; height: 14px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 100%; height: 14px;"></ion-skeleton-text>
       </div>
     </div>
-  </form>
+  }
 </div>
+}
+@else{
+  <div class="w-100 pt-1">
+  <button class="ion-padding secondary-button w-100 ion-display-flex align-center justify-center align-center gap-0-5" (click)="addAllergy()"><i
+      class="fa-light fa-plus"></i>Add new allergy</button>
+</div>
+  @if(patientAllergys.length > 0){
+<div class="hidden-border">
+  @for(allergy of patientAllergys; track allergy.id){
 
-<ion-modal trigger="allergenModel" #allergenModel [initialBreakpoint]="0.75">
+  <div class="ion-display-flex justify-between align-center border-bottom p-1">
+    <div class="ion-display-flex flex-column gap-0-25">
+      <div class="ion-display-flex gap-0-5 fs-3 align-center"><span class="dot"
+          [ngClass]="allergy.allergySeverityType"></span><span>{{allergy.allergySeverity}}</span></div>
+      <div class="secondary-text fs-2">{{getAllergyType(allergy.allergyIntolerance)}}</div>
+      <div class="secondary-text fs-2">{{allergy.allergyCode}}({{allergy.allergyCodeCode}})</div>
+    </div>
+    <div class="ion-display-flex gap-1">
+      <i class="fa-light fa-pen-to-square fs-4" (click)="editAllergie(allergy)"></i>
+      <i class="fa-light fa-trash fs-4"></i>
+    </div>
+  </div>
+  }
+</div>}
+@else{
+  <app-no-records message="No allergies found"></app-no-records>
+}
+
+<ion-modal  #addAllergenModel [initialBreakpoint]="0.75" (willDismiss)="allergyForm.reset()">
   <ng-template>
     <ion-header>
       <ion-toolbar class="px-1">
         <div class="ion-display-flex align-center gap-0-75 fs-4">
-          <div class="flex-1">Select allergen</div>
-          <i class="fa-thin fa-xmark" (click)="allergenModel.dismiss()"></i>
+          <div class="flex-1">{{allergenType}} allergen</div>
+          <i class="fa-thin fa-xmark" (click)="addAllergenModel.dismiss();allergyForm.reset()"></i>
         </div>
       </ion-toolbar>
     </ion-header>
+    <ion-content class="ion-padding" [fullscreen]="true" scroll-y="true">
+      <form [formGroup]="allergyForm" class="ion-display-flex gap-1 flex-column">
+        <div class="ion-display-flex flex-column gap-0-5">
+          <label for="allergen">Type *</label>
+          <ion-select placeholder="Select a type" interface="action-sheet" id="type" formControlName="type"
+            class="input-main-class px-1 ">
+            @for(severity of severityType; track severity.code) {
+            <ion-select-option [value]="severity">{{severity.description}}</ion-select-option>
+            }
+          </ion-select>
+        </div>
+        <div class="ion-display-flex flex-column gap-0-5">
+          <label for="allergen">Allergen *</label>
+          <div id="allergenModel">
+            <ion-input placeholder="Enter allergen" name="allergen" type="text" formControlName="allergen"
+              class="input-main-class px-1"></ion-input>
+          </div>
+        </div>
+        <div class="ion-display-flex flex-column gap-0-5">
+          <label for="allergen">Severity *</label>
 
-  <ion-content class="ion-padding" [fullscreen]="true" scroll-y="true">
-  <ion-input type="text" [formControl]="allergenSearch" class="input-main-class px-1" placeholder="Type to search allergen">
-  </ion-input>
-  
-  @for(item of filteredItems; track item.code){
-    <div button (click)="selectItem(item)">
-      {{ item.allergen }}
-    </div>
-  }
-</ion-content>
+          <ion-select placeholder="Select a severity" interface="action-sheet" id="severity" formControlName="severity"
+            class="input-main-class px-1 ">
+            @for(severity of severityOptions; track severity.type) {
+            <ion-select-option [value]="severity">{{severity.severity}}</ion-select-option>
+            }
+          </ion-select>
+
+        </div>
+        <div class="ion-display-flex flex-column gap-0-5">
+          <label for="allergen">Notes</label>
+          <ion-textarea placeholder="Enter notes" name="notes" type="text" formControlName="notes"
+            class="input-main-class px-1"></ion-textarea>
+
+        </div>
+         <div class=" ion-display-flex justify-end align-center">
+          <button class="ion-padding primary-button" (click)="submitAllergy()"
+            [disabled]="allergyForm.invalid">{{allergenType === 'Add' ? 'Add' : 'Update'}}</button>
+        </div>
+      </form>
+    </ion-content>
+
+
+    <ion-modal trigger="allergenModel" #allergenModel [initialBreakpoint]="0.75">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar class="px-1">
+            <div class="ion-display-flex align-center gap-0-75 fs-4">
+              <div class="flex-1">Select allergen</div>
+              <i class="fa-thin fa-xmark" (click)="allergenModel.dismiss()"></i>
+            </div>
+          </ion-toolbar>
+        </ion-header>
+
+        <ion-content class="ion-padding" [fullscreen]="true" scroll-y="true">
+
+          <div class="ion-display-flex flex-column hidden-border">
+            <div class="input-main-class px-0-5 ion-display-flex align-center">
+              <ion-input type="text" [formControl]="allergenSearch" class="pl-0-5 pr-1"
+                placeholder="Type to search allergen"></ion-input>
+              @if(searchLoaderEnable){
+              <ion-spinner name="crescent">
+              </ion-spinner>}
+            </div>
+            @if(allergenSearch.value){
+            @if(filteredItems.length > 0){ @for(item of filteredItems; track item.code){ <div button
+              (click)="selectItem(item)" class="border-bottom p-1">
+              {{ item.allergen }}
+            </div>
+            }}@else{
+
+            @if(searchLoaderEnable){ @for(skel of skeletonArray; track skel) { <div class="border-bottom p-1">
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </div>}}@else{
+            <app-no-records [message]="'No allergen found with ' + allergenSearch.value"></app-no-records>
+
+            }
+            }
+            }@else{
+            <div class="ion-display-flex flex-column justify-center gap-1 align-center pt-5">
+              <div class="w-40 h-40">
+                <img src="assets/icon/search.svg">
+              </div>
+              <div>Search for the allergen</div>
+            </div>
+            }
+          </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+
   </ng-template>
-</ion-modal>
+</ion-modal>}

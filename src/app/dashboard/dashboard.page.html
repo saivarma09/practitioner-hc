@@ -2,10 +2,11 @@
   <ion-toolbar class="ion-padding">
     <div class="ion-display-flex align-center justify-between">
       <div class="ion-display-flex align-center gap-1">
-        <div><i class="fa-light fs-6 fa-circle-user"></i></div>
-        <div>
+        <div><i class="fa-light fs-9 fa-circle-user"></i></div>
+        <div class="ion-display-flex flex-column">
           <div class="fs-1">Hello,</div>
-          <div class="fs-5">{{userName}}</div>
+          <div class="fs-5 pb-0-25">{{userName}}</div>
+          <div (click)="backToSiteSelection()" class="fs-2 ion-display-flex gap-0-5 align-center">{{siteId}}<i class="fa-thin fs-1 fa-pen"></i></div>
         </div>
       </div>
       <div class="notification-icon">

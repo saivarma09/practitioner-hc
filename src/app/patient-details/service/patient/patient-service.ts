@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AddPatientInsurer } from '../../models/insurer';
+import { PatientAllergiesResponse } from 'src/app/add-patients/models/allergy';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,21 @@ export class PatientService {
       .pipe(
         map(res => res.data || [])
       );
+  }
+
+  getAllergyseverity():Observable<any>{
+    return this.http.get(`${environment.apiUrl}/allergy/allergyseverity`)
+  }
+
+
+  getPatientAllergyInfo(patientId:string):Observable<any>{
+    return this.http.get(`${environment.apiUrl}/patient/${patientId}/allergies`)
+  }
+
+  submitAllergy(allergyInfo:any):Observable<any>{
+    return this.http.post(`${environment.apiUrl}/allergy`, allergyInfo)
+  }
+  updateAllergy(allergyInfo:any):Observable<any>{
+    return this.http.put(`${environment.apiUrl}/allergy`, allergyInfo)
   }
 }

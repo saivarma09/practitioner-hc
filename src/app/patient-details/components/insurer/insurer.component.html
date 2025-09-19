@@ -14,9 +14,14 @@
 </div>}
 @else{
 
+<div class="w-100 pt-1">
+  <button class="ion-padding secondary-button w-100 ion-display-flex align-center justify-center align-center gap-0-5" (click)="newInsurer()"><i
+      class="fa-light fa-plus"></i>Add new insurer</button>
+</div>
 @if(insurerInfo.length > 0){
 <div class="hidden-border py-1">
   @for(insurer of insurerInfo;track $index){
+
   <section class="ion-display-flex justify-between align-center ion-padding border-bottom">
     <div class="ion-display-flex gap-0-5 flex-column">
       <div class="fs-3 ion-display-flex align-center gap-0-5">{{insurer.description}}@if(insurer.isPrimary){<span
@@ -65,7 +70,6 @@
             <ion-select-option [value]="insurerOption">{{insurerOption.name}}</ion-select-option>
             }
           </ion-select>
-
         </div>
         <div class="ion-display-flex flex-column gap-0-5">
           <label for="membershipNumber">Membership number</label>

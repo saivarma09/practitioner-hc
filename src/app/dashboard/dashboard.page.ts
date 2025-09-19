@@ -5,6 +5,7 @@ import { DashboardService } from './service/dashboard/dashboard-service';
 import { DashboardData } from './model/dashboard';
 import { SiteService } from '../site-selection/service/site/site-service';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular/standalone';
 
 
 
@@ -22,14 +23,16 @@ export class DashboardPage implements OnInit {
   showCountsSkeletons = true;
   appointmentCounts?: DashboardData | any;
   userName:string =  '';
+  siteId:string = '';
 
 
-  constructor(private dashboardService: DashboardService, private siteService:SiteService, private router:Router) {
+  constructor(private dashboardService: DashboardService, private siteService:SiteService, private router:NavController) {
     this.userName = this.siteService.userInfo.title +' '+ this.siteService.userInfo.firstName +' '+ this.siteService.userInfo.lastName
    }
 
   ngOnInit() {
-    this.getAppointmentInfo();
+    // this.getAppointmentInfo();
+    this.siteId = localStorage.getItem('site_id') || 'HC2016'
   }
 
 
@@ -43,10 +46,14 @@ export class DashboardPage implements OnInit {
 
 
   patientInfo(){
-    this.router.navigate(['/patients-info'])
+    this.router.navigateForward(['/patients-info'])
   }
 
   addPatient(){
-    this.router.navigate(['/add-patients'])
+    this.router.navigateForward(['/add-patients'])
+  }
+
+  backToSiteSelection(){
+    this.router.navigateBack(['/site-selection'])
   }
 }

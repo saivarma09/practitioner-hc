@@ -5,14 +5,21 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class GenderPipe implements PipeTransform {
 
+  genderOptions = [
+    { description: "Male", id: "M" },
+    { description: "Female", id: "F" },
+    { description: "Transgender", id: "T" },
+    { description: "Prefers not to say", id: "O" },
+    { description: "Non-binary/non-conforming", id: "N" },
+    { description: "Unknown", id: "U" },
+  ];
+
   transform(value: string): string {
-    if (value.toUpperCase() == 'M') {
-      return "Male"
-    } else if (value.toUpperCase() === 'F') {
-      return "Female"
-    } else {
-      return value
-    }
+    if (!value) return value;
+
+    const found = this.genderOptions.find(opt => opt.id.toUpperCase() === value.toUpperCase());
+    return found ? found.description : value;
   }
+
 
 }

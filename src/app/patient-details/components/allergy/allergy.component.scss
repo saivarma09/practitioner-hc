@@ -1,11 +1,49 @@
-ion-item::part(native){
-padding-left: 0px !important;
+
+.border-bottom{
+    border-bottom: 1px solid var(--ion-border-color);
 }
 
-ion-list ion-item:last-child{
-    --border-color:transparent !important;
+.hidden-border .border-bottom:last-child{
+    border: none !important;
 }
 
-ion-list{
-        --background: var(--ion-background-color);
+
+.dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 50px;
+    display: block;
+}
+
+.S{
+    background: var(--ion-severe-color);
+}
+
+.O{
+    background: var(--ion-moderate-color);
+}
+.M{
+    background: var(--ion-mild-color);
+}
+.L{
+    background: var(--ion-life-threatening-color);
+}
+.F{
+    background: var(--ion-fatal-color);
+}
+
+
+.primary-button{
+    background: var(--ion-btn-primary-color);
+    color: var(--ion-white-color);
+    border: none;
+    border-radius: var(--ion-border-radius);
+}
+
+
+.secondary-button{
+    background: transparent;
+    color: var(--ion-primary-color);
+    border: 1px solid var(--ion-border-color);
+    border-radius: var(--ion-border-radius);
 }

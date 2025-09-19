@@ -38,10 +38,10 @@ export const routes: Routes = [
     path: 'patient-details/:id',
     loadComponent: () => import('./patient-details/patient-details.page').then( m => m.PatientDetailsPage)
   },
-  {
-    path: 'patient-details',
-    loadComponent: () => import('./patient-details/patient-details.page').then( m => m.PatientDetailsPage)
-  },
+  // {
+  //   path: 'patient-details',
+  //   loadComponent: () => import('./patient-details/patient-details.page').then( m => m.PatientDetailsPage)
+  // },
 
 
 ];

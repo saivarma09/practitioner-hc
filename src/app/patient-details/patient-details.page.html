@@ -15,20 +15,20 @@
             d="M6.81237 20.6843C4.51372 21.9137 -1.51315 24.425 2.1582 27.5684C3.95002 29.1029 5.94652 30.2009 8.45636 30.2009H22.7811C25.2926 30.2009 27.2891 29.1029 29.0809 27.5684C32.7523 24.425 26.7254 21.9137 24.4268 20.6843C21.759 19.2679 18.7172 18.5207 15.6188 18.5207C12.5203 18.5207 9.48013 19.2679 6.81237 20.6843ZM22.9306 7.5702C22.9306 9.31273 22.1604 10.9839 20.7895 12.216C19.4185 13.4482 17.5592 14.1404 15.6204 14.1404C13.6816 14.1404 11.8222 13.4482 10.4513 12.216C9.08034 10.9839 8.31016 9.31273 8.31016 7.5702C8.31016 5.82768 9.08034 4.15652 10.4513 2.92437C11.8222 1.69222 13.6816 1 15.6204 1C17.5592 1 19.4185 1.69222 20.7895 2.92437C22.1604 4.15652 22.9306 5.82768 22.9306 7.5702Z"
             [attr.stroke]="strokeColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg></div>
-      <div>{{patientDetails.title}} {{patientDetails.firstName}} {{patientDetails.lastName}}</div>
+      <div class="text-center">{{patientDetails.title}} {{patientDetails.firstName}} {{patientDetails.lastName}}</div>
     </div>
-    <div class="ion-display-flex flex-column gap-1 ion-padding">
+    <div class="ion-display-flex flex-column gap-1 ion-padding pt-2">
       <div class="ion-display-flex justify-between fs-3">
         <div class="secondary-text ">Age</div>
-        <div>{{patientDetails.age}}</div>
+        <div>{{patientDetails.age || '--'}}</div>
       </div>
       <div class="ion-display-flex justify-between fs-3">
         <div class="secondary-text">Date of birth</div>
-        <div>{{patientDetails.dateOfBirth | date:'dd/MM/yyyy'}}</div>
+        <div>{{(patientDetails.dateOfBirth | date:'dd/MM/yyyy') || '--'}}</div>
       </div>
       <div class="ion-display-flex justify-between fs-3">
         <div class="secondary-text">Gender</div>
-        <div>{{patientDetails.gender}}</div>
+        <div>{{(patientDetails.gender | gender) || '--'}}</div>
       </div>
       <div class="ion-display-flex justify-between fs-3">
         <div class="secondary-text">Balance</div>
@@ -38,7 +38,7 @@
   </div>
 
   <div>
-    <section class="ion-display-flex w-100 align-center overflow-hidden">
+    <section class="ion-display-flex w-100 align-center overflow-hidden justify-between">
       <i class="fa-light fa-chevron-left fs-1 px-1"  (click)="scrollLeft()"></i>
       <div #scrollContainer class="ion-display-flex gap-1  overflow-auto">
         @for(option of patientOptions;track option.value) {
@@ -62,7 +62,8 @@
       }
       
       @case('allergies'){
-        <app-allergy></app-allergy>
+           @if(patientId){
+        <app-allergy [patientId]="patientId"></app-allergy>}
       }}
     </section>
   </div>

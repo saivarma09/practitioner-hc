@@ -36,78 +36,77 @@ export class InsurerComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getSelectedPatientInsurerInfo();
+    this.getSelectedPatientInsurerInfo();
     // alert(this.patientId)
-    this.insurerResponse = {
-      "data": [
-        {
-          "patientId": "EqaN9grUfCqDVRa63kuQTekFI",
-          "id": "bup",
-          "code": "bup",
-          "name": "BUPA",
-          "requiresDiagnosisCode": true,
-          "isSTV": false,
-          "acceptEdiClaims": true,
-          "isESTV": false,
-          "isSynchronousME": false,
-          "description": "BUPA",
-          "startDate": "",
-          "expiryDate": "12/31/2025 00:00:00",
-          "expired": false,
-          "renewalDate": "",
-          "isPrimary": true,
-          "enquireAboutMembershipNo": false,
-          "lastVerified": "",
-          "isValid": false,
-          "membershipId": "BHU6543"
-        }, {
-          "patientId": "EqaN9grUfCqDVRa63kuQTekFI",
-          "id": "wpa",
-          "code": "wpa",
-          "name": "WPA",
-          "requiresDiagnosisCode": false,
-          "isSTV": false,
-          "acceptEdiClaims": true,
-          "isESTV": false,
-          "isSynchronousME": false,
-          "scheme": "1234568",
-          "description": "WPA",
-          "startDate": "",
-          "expiryDate": "09/18/2025 00:00:00",
-          "expired": true,
-          "renewalDate": "",
-          "isPrimary": true,
-          "enquireAboutMembershipNo": false,
-          "lastVerified": "",
-          "isValid": false,
-          "membershipId": "WPA123"
-        }
-      ],
-      "success": true,
-      "resource": "PatientInsurer"
-    }
-    this.insurerInfo = this.insurerResponse.data
+    // this.insurerResponse = {
+    //   "data": [
+    //     {
+    //       "patientId": "EqaN9grUfCqDVRa63kuQTekFI",
+    //       "id": "bup",
+    //       "code": "bup",
+    //       "name": "BUPA",
+    //       "requiresDiagnosisCode": true,
+    //       "isSTV": false,
+    //       "acceptEdiClaims": true,
+    //       "isESTV": false,
+    //       "isSynchronousME": false,
+    //       "description": "BUPA",
+    //       "startDate": "",
+    //       "expiryDate": "12/31/2025 00:00:00",
+    //       "expired": false,
+    //       "renewalDate": "",
+    //       "isPrimary": true,
+    //       "enquireAboutMembershipNo": false,
+    //       "lastVerified": "",
+    //       "isValid": false,
+    //       "membershipId": "BHU6543"
+    //     }, {
+    //       "patientId": "EqaN9grUfCqDVRa63kuQTekFI",
+    //       "id": "wpa",
+    //       "code": "wpa",
+    //       "name": "WPA",
+    //       "requiresDiagnosisCode": false,
+    //       "isSTV": false,
+    //       "acceptEdiClaims": true,
+    //       "isESTV": false,
+    //       "isSynchronousME": false,
+    //       "scheme": "1234568",
+    //       "description": "WPA",
+    //       "startDate": "",
+    //       "expiryDate": "09/18/2025 00:00:00",
+    //       "expired": true,
+    //       "renewalDate": "",
+    //       "isPrimary": true,
+    //       "enquireAboutMembershipNo": false,
+    //       "lastVerified": "",
+    //       "isValid": false,
+    //       "membershipId": "WPA123"
+    //     }
+    //   ],
+    //   "success": true,
+    //   "resource": "PatientInsurer"
+    // }
+    // this.insurerInfo = this.insurerResponse.data
   }
 
 
   async editInsurer(insurerInfo: PatientInsurer) {
-    if (!this.insurersOptions.length) {
-      await this.getInsurerInfo()
-    }
+    await this.getInsurerInfo();
 
     const selectedInsurer = this.insurersOptions.find(option => option.id === insurerInfo.id);
     let restoreForm = {
-      "insurer": {
-        "id": insurerInfo.id,
-        "code": insurerInfo.code,
-        "name": insurerInfo.name,
-        "isRequiresDiagnosisCode": insurerInfo.requiresDiagnosisCode,
-        "isSTV": insurerInfo.isSTV,
-        "isAcceptEdiClaims": insurerInfo.acceptEdiClaims,
-        "isESTV": insurerInfo.isESTV,
-        "isSynchronousME": insurerInfo.isSynchronousME,
-        "addresses": []
-      },
+      // "insurer": {
+      //   "id": insurerInfo.id,
+      //   "code": insurerInfo.code,
+      //   "name": insurerInfo.name,
+      //   "isRequiresDiagnosisCode": insurerInfo.requiresDiagnosisCode,
+      //   "isSTV": insurerInfo.isSTV,
+      //   "isAcceptEdiClaims": insurerInfo.acceptEdiClaims,
+      //   "isESTV": insurerInfo.isESTV,
+      //   "isSynchronousME": insurerInfo.isSynchronousME,
+      //   "addresses": []
+      // },
+      "insurer": selectedInsurer,
       "membershipNumber": insurerInfo.membershipId,
       "scheme": insurerInfo.scheme,
       "expiryDate": insurerInfo.expiryDate,
@@ -118,20 +117,24 @@ export class InsurerComponent implements OnInit {
     this.insurerForm.controls['insurer'].disable();
     this.insurerType = 'Edit';
     this.insurerModel.present();
-    setTimeout(() => {
-      this.cdr.detectChanges();
-    }, 50);
+    this.cdr.detectChanges();
+
   }
 
-  async getInsurerInfo() {
-    this.patientService.getInsurers().subscribe({
-      next: (insurer: InsurerResponse) => {
-        this.insurersOptions = insurer.data;
-        return this.insurersOptions;
-      },
-      error: () => {
-        console.error('Error fetching insurer');
-        return 'error'
+  getInsurerInfo() {
+    return new Promise((resolve, reject) => {
+      if (this.insurersOptions.length <= 0) {
+        this.patientService.getInsurers().subscribe({
+          next: (insurer: InsurerResponse) => {
+            this.insurersOptions = insurer.data;
+            return resolve(this.insurersOptions);
+          },
+          error: (error) => {
+            return reject(error)
+          }
+        })
+      } else {
+        return resolve(this.insurersOptions)
       }
     })
   }
@@ -154,6 +157,7 @@ export class InsurerComponent implements OnInit {
           this.showToast('Insurer successfully updated');
           this.getSelectedPatientInsurerInfo();
           this.insurerModel.dismiss();
+          this.insurerReset();
         },
         error: () => { }
       })
@@ -163,6 +167,7 @@ export class InsurerComponent implements OnInit {
           this.showToast('Insurer successfully added');
           this.getSelectedPatientInsurerInfo();
           this.insurerModel.dismiss();
+          this.insurerReset();
         },
         error: () => { }
       })
@@ -205,6 +210,15 @@ export class InsurerComponent implements OnInit {
 
       }
     })
+  }
+
+
+
+  async newInsurer() {
+     await this.getInsurerInfo();
+    this.insurerType = 'Add';
+    this.insurerModel.present();
+    this.cdr.detectChanges();
   }
 
 }
