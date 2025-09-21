@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="dashboard-header">
   <ion-toolbar class="ion-padding">
     <div class="ion-display-flex align-center justify-between">
       <div class="ion-display-flex align-center gap-1">
@@ -6,7 +6,8 @@
         <div class="ion-display-flex flex-column">
           <div class="fs-1">Hello,</div>
           <div class="fs-5 pb-0-25">{{userName}}</div>
-          <div (click)="backToSiteSelection()" class="fs-2 ion-display-flex gap-0-5 align-center">{{siteId}}<i class="fa-thin fs-1 fa-pen"></i></div>
+          <div (click)="backToSiteSelection()" class="fs-2 ion-display-flex gap-0-5 align-center">{{siteId}}<i
+              class="fa-thin fs-1 fa-pen"></i></div>
         </div>
       </div>
       <div class="notification-icon">
@@ -18,68 +19,90 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="ion-display-flex flex-column gap-2">
-  <section class="ion-display-flex gap-1 flex-column">
-    <div class="fs-3">Today's schedules</div>
-    <div class="ion-display-flex flex-column gap-1" *ngIf="showSkeletons">
-      <section class="loading-section" *ngFor="let loader of loaders; let i = index">
-        <ion-skeleton-text [animated]="true" class="profile"></ion-skeleton-text>
-        <div class="text-group">
-          <ion-skeleton-text [animated]="true" class="type"></ion-skeleton-text>
-          <ion-skeleton-text [animated]="true" class="date"></ion-skeleton-text>
-        </div>
-      </section>
-    </div>
-  </section>
-  <section class="ion-display-flex gap-1 flex-column">
-    <div class="fs-3">Quick stats</div>
-    <section class="ion-display-flex gap-1 flex-column" >
-      <div class="ion-display-flex gap-1 w-100">
-        <div class="ion-display-flex flex-column gap-0-5 w-50 ion-padding background-stats">
-          @if(showCountsSkeletons){
-          <ion-skeleton-text [animated]="true" class="appontments"></ion-skeleton-text>
-          <ion-skeleton-text [animated]="true" class="appontments w-50"></ion-skeleton-text>}
-          @else{
+    <section class="ion-display-flex gap-1 flex-column">
+      <div class="fs-3">Today's schedules</div>
+      <div class="ion-display-flex flex-column gap-1" *ngIf="showSkeletons">
+        <section class="loading-section" *ngFor="let loader of loaders; let i = index">
+          <ion-skeleton-text [animated]="true" class="profile"></ion-skeleton-text>
+          <div class="text-group">
+            <ion-skeleton-text [animated]="true" class="type"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" class="date"></ion-skeleton-text>
+          </div>
+        </section>
+      </div>
+    </section>
+    <section class="ion-display-flex gap-1 flex-column">
+      <div class="fs-3">Quick stats</div>
+      <section class="ion-display-flex gap-1 flex-column">
+        <div class="ion-display-flex gap-1 w-100">
+          <div class="ion-display-flex flex-column gap-0-5 w-50 ion-padding background-stats">
+            @if(showCountsSkeletons){
+            <ion-skeleton-text [animated]="true" class="appontments"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" class="appontments w-50"></ion-skeleton-text>}
+            @else{
             <div>Task</div>
             <div class="fs-6">{{appointmentCounts.data.task.totalTasks}}</div>
-          }
+            }
 
-        </div>
-        <div class="ion-display-flex flex-column gap-0-25 w-50 ion-padding background-stats">
-          @if(showCountsSkeletons){
-          <ion-skeleton-text [animated]="true" class="revenue"></ion-skeleton-text>
-          <ion-skeleton-text [animated]="true" class="revenue w-50"></ion-skeleton-text>}
-          @else{
+          </div>
+          <div class="ion-display-flex flex-column gap-0-25 w-50 ion-padding background-stats">
+            @if(showCountsSkeletons){
+            <ion-skeleton-text [animated]="true" class="revenue"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" class="revenue w-50"></ion-skeleton-text>}
+            @else{
             <div>Appointments</div>
             <div class="fs-6">{{appointmentCounts.data.appointments.totalAppointments}}</div>
-          }
+            }
+          </div>
         </div>
-      </div>
-      <div class="ion-display-flex flex-column gap-0-5 ion-padding background-stats">
-        @if(showCountsSkeletons){
-        <ion-skeleton-text [animated]="true" class="patient-satisfaction"></ion-skeleton-text>
-        <ion-skeleton-text [animated]="true" class="patient-satisfaction w-50"></ion-skeleton-text>}
-        @else{
+        <div class="ion-display-flex flex-column gap-0-5 ion-padding background-stats">
+          @if(showCountsSkeletons){
+          <ion-skeleton-text [animated]="true" class="patient-satisfaction"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" class="patient-satisfaction w-50"></ion-skeleton-text>}
+          @else{
           <div>Today appointments</div>
           <div class="fs-6">{{appointmentCounts.data.todayAppointments.todayAppointments}}</div>
-        }
-      </div>
+          }
+        </div>
+      </section>
     </section>
-  </section>
-  <section class="ion-display-flex gap-1 flex-column">
-    <div class="fs-3">Patients</div>
-    <section class="ion-display-flex flex-column gap-1">
-      <div class="ion-display-flex align-center gap-1" (click)="patientInfo()">
-        <div class="background-patient"><i class="fa-light fa-user"></i></div>
-        <div class="flex-1">Patients</div>
-        <div><i class="fa-light fa-chevron-right"></i></div>
-      </div>
-      <div class="ion-display-flex align-center gap-1" (click)="addPatient()">
-        <div class="background-patient"><i class="fa-light fa-user-plus"></i></div>
-        <div class="flex-1">Add patient</div>
-        <div><i class="fa-light fa-chevron-right"></i></div>
-      </div>
+    <section class="ion-display-flex gap-1 flex-column">
+      <div class="fs-3">Patients</div>
+      <section class="ion-display-flex flex-column gap-1">
+        <div class="ion-display-flex align-center gap-1" (click)="patientInfo()">
+          <div class="background-patient"><i class="fa-light fa-user"></i></div>
+          <div class="flex-1">Patients</div>
+          <div><i class="fa-light fa-chevron-right"></i></div>
+        </div>
+        <div class="ion-display-flex align-center gap-1" (click)="addPatient()">
+          <div class="background-patient"><i class="fa-light fa-user-plus"></i></div>
+          <div class="flex-1">Add patient</div>
+          <div><i class="fa-light fa-chevron-right"></i></div>
+        </div>
+      </section>
     </section>
-  </section>
   </div>
+
+
+
+  <ion-modal #avatarSelected (willDismiss)="onWillDismiss()" [initialBreakpoint]="0.75">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <div class="ion-display-flex align-center gap-0-75 fs-4">
+            <div class="flex-1">Select avatar</div>
+            <i class="fa-thin fa-xmark" (click)="avatarSelected.dismiss()"></i>
+          </div>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+       @for(avatarImg of avatar; track $index){
+        <div class="background-avatar">
+          <img [src]="'assets/icon/avatar/' + avatarImg.title + '.svg'">
+       </div>
+      }
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
 </ion-content>

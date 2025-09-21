@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { COMMON_MODULES } from '../shared/imports/imports';
 import { LOADER_COUNT } from '../shared/constants/loader';
 import { DashboardService } from './service/dashboard/dashboard-service';
 import { DashboardData } from './model/dashboard';
 import { SiteService } from '../site-selection/service/site/site-service';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular/standalone';
+import { IonModal, NavController } from '@ionic/angular/standalone';
 
 
 
@@ -14,27 +14,42 @@ import { NavController } from '@ionic/angular/standalone';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
-  imports: [COMMON_MODULES]
+  imports: [COMMON_MODULES, IonModal]
 })
-export class DashboardPage implements OnInit {
-
+export class DashboardPage implements OnInit, AfterViewInit {
+  @ViewChild('avatarSelected') avatarSelected!:IonModal;
   loaders = ['', '', '', ''];
   showSkeletons = true;
   showCountsSkeletons = true;
   appointmentCounts?: DashboardData | any;
   userName:string =  '';
   siteId:string = '';
-
+avatar:any[]=[
+  {title:'avatar-1'},
+  {title:'avatar-2'},
+  {title:'avatar-3'},
+  {title:'avatar-4'},
+  {title:'avatar-5'},
+  {title:'avatar-6'},
+  {title:'avatar-7'},
+  {title:'avatar-8'},
+  {title:'avatar-9'},
+]
 
   constructor(private dashboardService: DashboardService, private siteService:SiteService, private router:NavController) {
-    this.userName = this.siteService.userInfo.title +' '+ this.siteService.userInfo.firstName +' '+ this.siteService.userInfo.lastName
+    this.userName = this.siteService.userInfo.title +' '+ this.siteService.userInfo.firstName +' '+ this.siteService.userInfo.lastName;
    }
 
   ngOnInit() {
     // this.getAppointmentInfo();
     this.siteId = localStorage.getItem('site_id') || 'HC2016'
   }
-
+  
+  
+  ngAfterViewInit(): void {
+    this.avatarSelected.present();
+    
+  }
 
 
   getAppointmentInfo() {
@@ -55,5 +70,9 @@ export class DashboardPage implements OnInit {
 
   backToSiteSelection(){
     this.router.navigateBack(['/site-selection'])
+  }
+
+  onWillDismiss(){
+
   }
 }

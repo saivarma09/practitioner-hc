@@ -9,6 +9,8 @@
     align-items: center;
 }
 
+.dashboard-header{
+
 ion-toolbar::part(background) {
     background: var(--ion-dashboard-header);
     opacity: 1 !important;
@@ -22,7 +24,7 @@ ion-toolbar {
     color: var(--ion-white-color);
     border-radius: 0px 0px 32px 32px;
 }
-
+}
 .loading-section {
   display: flex;
   align-items: center;
@@ -94,4 +96,8 @@ ion-skeleton-text {
     justify-content: center;
     color: var(--ion-primary-color);
     align-items: center;
+}
+
+.background-avatar{
+  background: var(--ion-primary-color);
 }
