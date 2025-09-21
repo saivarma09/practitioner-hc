@@ -17,38 +17,44 @@ import { IonModal, NavController } from '@ionic/angular/standalone';
   imports: [COMMON_MODULES, IonModal]
 })
 export class DashboardPage implements OnInit, AfterViewInit {
-  @ViewChild('avatarSelected') avatarSelected!:IonModal;
+  @ViewChild('avatarSelectedModal') avatarSelectedModal!: IonModal;
   loaders = ['', '', '', ''];
   showSkeletons = true;
   showCountsSkeletons = true;
   appointmentCounts?: DashboardData | any;
-  userName:string =  '';
-  siteId:string = '';
-avatar:any[]=[
-  {title:'avatar-1'},
-  {title:'avatar-2'},
-  {title:'avatar-3'},
-  {title:'avatar-4'},
-  {title:'avatar-5'},
-  {title:'avatar-6'},
-  {title:'avatar-7'},
-  {title:'avatar-8'},
-  {title:'avatar-9'},
-]
+  userName: string = '';
+  siteId: string = '';
+  selectedAvatar: string | null = 'none';
+  avatar: any[] = [
+    { title: 'avatar-1' },
+    { title: 'avatar-2' },
+    // {title:'avatar-3'},
+    { title: 'avatar-7' },
+    { title: 'avatar-4' },
+    { title: 'avatar-6' },
+    { title: 'avatar-8' },
+    { title: 'avatar-5' },
+    { title: 'avatar-9' },
+  ]
 
-  constructor(private dashboardService: DashboardService, private siteService:SiteService, private router:NavController) {
-    this.userName = this.siteService.userInfo.title +' '+ this.siteService.userInfo.firstName +' '+ this.siteService.userInfo.lastName;
-   }
+  constructor(private dashboardService: DashboardService, private siteService: SiteService, private router: NavController) {
+    this.userName = this.siteService.userInfo.title + ' ' + this.siteService.userInfo.firstName + ' ' + this.siteService.userInfo.lastName;
+  }
 
   ngOnInit() {
     // this.getAppointmentInfo();
     this.siteId = localStorage.getItem('site_id') || 'HC2016'
   }
-  
-  
+
+
   ngAfterViewInit(): void {
-    this.avatarSelected.present();
-    
+    let avatar = localStorage.getItem('avatar') || null;
+    if (!avatar) {
+      this.avatarSelectedModal.present();
+    }else{
+      this.selectedAvatar = avatar;
+    }
+
   }
 
 
@@ -60,19 +66,26 @@ avatar:any[]=[
   }
 
 
-  patientInfo(){
+  patientInfo() {
     this.router.navigateForward(['/patients-info'])
   }
 
-  addPatient(){
+  addPatient() {
     this.router.navigateForward(['/add-patients'])
   }
 
-  backToSiteSelection(){
+  backToSiteSelection() {
     this.router.navigateBack(['/site-selection'])
   }
 
-  onWillDismiss(){
+  onWillDismiss() {
+    // localStorage.setItem('avatar', 'none')
 
+  }
+
+  avatarSelected(avatar: any) {
+    this.selectedAvatar = avatar;
+    localStorage.setItem('avatar', avatar);
+    this.avatarSelectedModal.dismiss();
   }
 }
