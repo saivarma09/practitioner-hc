@@ -1,4 +1,4 @@
-.profile-icon{
+.profile-icon {
     width: 100px;
     height: 100px;
     border: 2px solid var(--ion-border-color);
@@ -6,15 +6,66 @@
 }
 
 
-.border-bottom{
+.border-bottom {
     border-bottom: 1px solid var(--ion-border-color);
 }
 
-.hidden-border .border-bottom:last-child{
+.hidden-border .border-bottom:last-child {
     border: none !important;
 }
 
 
-.fa-house-blank{
+.fa-house-blank {
     color: var(--ion-success-color);
 }
+
+.edit-profile {
+    position: absolute;
+    font-size: 1.5rem;
+    color: #929292;
+    right: 0px;
+    top: 5px;
+    background-color: var(--ion-background-color);
+    border-radius: 100px;
+
+}
+
+.fs-50 {
+    font-size: 60px;
+}
+
+
+.background-avatar-selected {
+    width: 100%;
+    height: 100%;
+    color: #929292;
+
+}
+
+
+.background-avatar.active {
+  border: 2px solid var(--ion-success-color);
+  .fa-circle-check{
+    display: block;
+  }
+}
+
+.background-avatar {
+  // background: var(--ion-primary-color);
+  border: 1px solid var(--ion-border-color);
+  border-radius: 50px;
+    height: 90px;
+      color: #929292;
+}
+
+.fa-circle-check {
+  position: absolute;
+  top: 3px;
+  right: 0px;
+  font-size: 1.3rem;
+  color: var(--ion-success-color);
+  display: none;
+  background: var(--ion-background-color);
+  border-radius: 100px;
+}
+

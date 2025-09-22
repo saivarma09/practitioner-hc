@@ -18,7 +18,7 @@ export class ClinicalNotesComponent  implements OnInit {
   patientClinicalNotesResponse:PatientClinicalNotesResponse = {} as PatientClinicalNotesResponse;
   selectedNotes:PatientClinicalNote = {} as PatientClinicalNote;
   patientNotesLoaders = ['', '', ''];
-  showNotesSkeletons = true;
+  showNotesSkeletons = false;
   patientClinicalNotes:PatientClinicalNote[] = [];
   constructor(private patientService: PatientService) { }
 
@@ -27,8 +27,10 @@ export class ClinicalNotesComponent  implements OnInit {
   }
 
   getPatientClinicalNotes(){
+    this.showNotesSkeletons = true;
     this.patientService.getPatientDetails(this.patientId).subscribe({
       next: (res: PatientClinicalNotesResponse) => {
+        this.showNotesSkeletons = false;
         this.patientClinicalNotesResponse = res;
         this.patientClinicalNotes = res.data;
       },

@@ -104,6 +104,7 @@ ion-skeleton-text {
   // background: var(--ion-primary-color);
   border: 1px solid var(--ion-border-color);
   border-radius: 50px;
+
 }
 
 .fs-50 {
@@ -117,6 +118,8 @@ ion-skeleton-text {
     display: block;
   }
 }
+
+
 
 .fa-circle-check {
   position: absolute;
@@ -132,6 +135,6 @@ ion-skeleton-text {
 .profile-icon{
     width: 50px;
     height: 50px;
-    border: 1px solid var(--ion-border-color);
+    border: 1px solid var(--ion-white-color);
     border-radius: 50px;
 }
