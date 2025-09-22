@@ -863,6 +863,10 @@ ion-row {
   text-align: justify;
 }
 
+.text-no-wrap {
+  white-space: nowrap;
+}
+
 ion-action-sheet {
     --max-height: 80vh !important;
     --height: 100% !important;

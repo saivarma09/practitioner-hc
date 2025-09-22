@@ -39,16 +39,16 @@
 
   <div>
     <section class="ion-display-flex w-100 align-center overflow-hidden justify-between">
-      <i class="fa-light fa-chevron-left fs-1 px-1"  (click)="scrollLeft()"></i>
+      <i class="fa-light fa-chevron-left fs-1 px-1" (click)="scrollLeft()"></i>
       <div #scrollContainer class="ion-display-flex gap-1  overflow-auto">
         @for(option of patientOptions;track option.value) {
-        <div #optionEl (click)="selectOptionHandler(option, optionEl)" class="fs-2 py-0-5 px-0-5"
+        <div #optionEl (click)="selectOptionHandler(option, optionEl)" class="fs-2 py-0-5 px-0-5 text-no-wrap"
           [ngClass]="{'selected-option': option.value === selectOption}">
           {{option.label}}
         </div>
         }
       </div>
-      <i class="fa-light fs-1 fa-chevron-right px-1"  (click)="scrollRight()"></i>
+      <i class="fa-light fs-1 fa-chevron-right px-1" (click)="scrollRight()"></i>
     </section>
     <section class="px-1">
       @switch(selectOption) {
@@ -60,11 +60,18 @@
       @if(patientId){
       <app-insurer [patientId]="patientId"></app-insurer>}
       }
-      
+
       @case('allergies'){
-           @if(patientId){
-        <app-allergy [patientId]="patientId"></app-allergy>}
-      }}
+      @if(patientId){
+      <app-allergy [patientId]="patientId"></app-allergy>}
+      }
+      @case('clinicalNotes'){
+      @if(patientId){
+      <app-clinical-notes [patientId]="patientId"></app-clinical-notes>}
+      }
+
+      }
+
     </section>
   </div>
 </ion-content>

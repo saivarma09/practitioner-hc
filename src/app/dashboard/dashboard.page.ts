@@ -42,7 +42,7 @@ export class DashboardPage implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // this.getAppointmentInfo();
+    this.getAppointmentInfo();
     this.siteId = localStorage.getItem('site_id') || 'HC2016'
   }
 
@@ -87,5 +87,9 @@ export class DashboardPage implements OnInit, AfterViewInit {
     this.selectedAvatar = avatar;
     localStorage.setItem('avatar', avatar);
     this.avatarSelectedModal.dismiss();
+  }
+
+  profileSelected(){
+    this.router.navigateForward(['/profile']);
   }
 }

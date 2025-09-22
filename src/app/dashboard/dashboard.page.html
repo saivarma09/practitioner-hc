@@ -3,7 +3,7 @@
     <div class="ion-display-flex align-center justify-between gap-0-25">
       <div class="ion-display-flex align-center gap-1">
 
-        <div class="profile-icon">
+        <div class="profile-icon" (click)="profileSelected()">
           @if(selectedAvatar && selectedAvatar != 'none'){
             <img [src]="'assets/icon/avatar/' + selectedAvatar + '.svg'">
           }@else{

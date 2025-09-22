@@ -1,0 +1,11 @@
+.notes-icon::before{
+    background: var(--ion-border-color);
+    content: "";
+    width: 2px;
+    height: 2rem;
+    position: absolute;
+    bottom: -2.5rem;
+    left: 40%;
+}
+
+

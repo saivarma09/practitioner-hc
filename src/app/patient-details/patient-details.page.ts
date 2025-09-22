@@ -9,25 +9,27 @@ import { ActivatedRoute } from '@angular/router';
 import { InsurerComponent } from './components/insurer/insurer.component';
 import { AllergyComponent } from './components/allergy/allergy.component';
 import { GenderPipe } from '../shared/pipes/gender/gender-pipe';
+import { ClinicalNotesComponent } from './components/clinical-notes/clinical-notes.component';
 
 @Component({
   selector: 'app-patient-details',
   templateUrl: './patient-details.page.html',
   styleUrls: ['./patient-details.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, DatePipe, IonTabs, IonTabButton, IonTabBar, AppointmentsComponent,GenderPipe, InsurerComponent, AllergyComponent]
+  imports: [IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, DatePipe,  AppointmentsComponent,GenderPipe, InsurerComponent, AllergyComponent, ClinicalNotesComponent]
 })
 export class PatientDetailsPage implements OnInit {
   @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef<HTMLDivElement>;
   strokeColor: string = 'var(--ion-primary-color)';
   patientDetails: PatientData = {} as PatientData;
   patientOptions = [
+    { value: 'clinicalNotes', label: 'Clinical Notes', status: false },
     { value: 'appointments', label: 'Appointments', status: false },
     // { value: 'correspondence', label: 'Correspondence', status: false },
     { value: 'insurer', label: 'Insurer', status: false },
     { value: 'allergies', label: 'Allergies', status: false },
   ];
-  selectOption: string = 'allergies';
+  selectOption: string = 'clinicalNotes';
   patientId:string='';
 
   constructor(private navController: NavController, private patientService: PatientService, private route: ActivatedRoute, private cdr:ChangeDetectorRef) {

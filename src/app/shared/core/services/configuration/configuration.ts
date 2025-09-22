@@ -98,6 +98,10 @@ await this.generateSsoSession();
         console.log('SSO code found in URL parameters:', paramCodeValue);
 
         try {
+           const loading = await this.loadingCtrl.create({
+              message: 'Loading your clinical tools...',
+            });
+            await loading.present();
           // Step 1: Get sessionData
           const sessionData = await this.ssoAuthService
             .getTokenUsingParamCode(paramCodeValue, this.clientId) //pending;
@@ -123,10 +127,7 @@ await this.generateSsoSession();
             // Reset prompt after successful login
             this.prompt = 'none';
 
-            const loading = await this.loadingCtrl.create({
-              message: 'Loading your clinical tools...',
-            });
-            await loading.present();
+           
             this.ssoAuthService.getUser(session.sessionData.token).then(userData => {
               console.log('User data fetched successfully:', userData);
               localStorage.setItem('userData', JSON.stringify(userData));

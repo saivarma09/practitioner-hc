@@ -64,4 +64,8 @@ export class PatientService {
   updateAllergy(allergyInfo:any):Observable<any>{
     return this.http.put(`${environment.apiUrl}/allergy`, allergyInfo)
   }
+
+  getClinicalNotes(patientId:string):Observable<any>{
+    return this.http.get(`${environment.apiUrl}/patientnote/${patientId}/getnotesbyid`)
+  }
 }
