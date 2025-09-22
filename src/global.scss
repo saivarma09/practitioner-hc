@@ -104,10 +104,10 @@ ion-row {
 }
 
 /* If you need 16px minimum + safe area */
-.md ion-header ion-toolbar:first-of-type {
+ion-header ion-toolbar:first-of-type {
     padding-top: max(3rem, var(--ion-safe-area-top, 0)) !important;
 }
-.md ion-modal ion-header ion-toolbar:first-of-type {
+ion-modal ion-header ion-toolbar:first-of-type {
     padding-top: max(0rem, var(--ion-safe-area-top, 0)) !important;
 }
 
