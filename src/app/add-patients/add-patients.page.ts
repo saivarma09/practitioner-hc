@@ -11,7 +11,6 @@ import { Ethnicity, EthnicityResponse } from './models/ethnicity';
 import { Gender, Title } from './models/gender';
 import { AddressType, AddressTypeResponse } from './models/addresstype';
 import { TelecomType, TelecomTypeResponse } from './models/telecom';
-import { Router } from '@angular/router';
 import { CommonService } from '../shared/services/common/common-service';
 
 @Component({
@@ -27,7 +26,7 @@ export class AddPatientsPage implements OnInit {
   @ViewChild(IonContent, { static: false }) content!: IonContent;
 
   selectedSection: number = 1;
-  progressValue: number = 0;
+  progressValue: number = 0.25;
   sectionTitle: string = "Patient details";
   selectedDate: string | null = null;
   telecoms: TelecomType[] = [];
@@ -200,17 +199,17 @@ export class AddPatientsPage implements OnInit {
     switch (this.selectedSection) {
       case 1:
         this.selectedSection = 2;
-        this.progressValue = 0.25;
+        this.progressValue = 0.5;
         this.sectionTitle = "Address";
         break;
       case 2:
         this.selectedSection = 3;
-        this.progressValue = 0.5;
+        this.progressValue = 0.75;
         this.sectionTitle = "Telecoms";
         break;
       case 3:
         this.selectedSection = 4;
-        this.progressValue = 0.75;
+        this.progressValue = 1;
         this.sectionTitle = "Identifiers";
         break;
       case 4:
@@ -237,22 +236,22 @@ export class AddPatientsPage implements OnInit {
         break;
       case 2:
         this.selectedSection = 1;
-        this.progressValue = 0;
+        this.progressValue = 0.25;
         this.sectionTitle = "Patient details";
         break;
       case 3:
         this.selectedSection = 2;
-        this.progressValue = 0.25;
+        this.progressValue = 0.5;
         this.sectionTitle = "Address";
         break;
       case 4:
         this.selectedSection = 3;
-        this.progressValue = 0.5;
+        this.progressValue = 0.75;
         this.sectionTitle = "Telecoms";
         break;
       case 5:
         this.selectedSection = 4;
-        this.progressValue = 0.75;
+        this.progressValue = 1;
         this.sectionTitle = "Identifiers";
         break;
     }

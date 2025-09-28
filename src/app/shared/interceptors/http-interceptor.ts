@@ -42,7 +42,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     // Add auth headers
     const authReq = this.addAuthHeaders(req, authData.token, authData.siteId);
     
-    // Handle request (native vs web)
+    // Handle request (mobile vs web based on environment variable)
     return this.handleRequest(authReq, next).pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error, req, next))
     );
@@ -76,11 +76,16 @@ export class HttpInterceptorService implements HttpInterceptor {
   }
 
   private handleRequest(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const isNative = Capacitor.isNativePlatform();
+    // Use environment variable to determine if mobile mode
+    // environment.isMobile = true means use mobile/native handling
+    // environment.isMobile = false means use web handling
+    const useMobileHandling = environment.isMobile === true;
 
-    if (isNative) {
+    if (useMobileHandling) {
+      console.debug('[HTTP] Using mobile/native request handling');
       return this.handleNativeRequest(req);
     } else {
+      console.debug('[HTTP] Using web request handling');
       return next.handle(req);
     }
   }
@@ -98,7 +103,7 @@ export class HttpInterceptorService implements HttpInterceptor {
       if (v !== null) paramsObj[k] = v;
     });
 
-    console.debug('[HTTP][native] request', { url: req.url, method: req.method });
+    console.debug('[HTTP][mobile] request', { url: req.url, method: req.method });
     
     return from(
       CapacitorHttp.request({
@@ -110,7 +115,7 @@ export class HttpInterceptorService implements HttpInterceptor {
       })
     ).pipe(
       mergeMap((res: any) => {
-        console.debug('[HTTP][native] response', { url: req.url, status: res?.status });
+        console.debug('[HTTP][mobile] response', { url: req.url, status: res?.status });
         if (res.status >= 200 && res.status < 300) {
           const response = new HttpResponse({
             body: res.data,
@@ -120,7 +125,7 @@ export class HttpInterceptorService implements HttpInterceptor {
           });
           return of(response as HttpEvent<any>);
         }
-        console.error('[HTTP][native] error', { url: req.url, status: res?.status, data: res?.data });
+        console.error('[HTTP][mobile] error', { url: req.url, status: res?.status, data: res?.data });
         return throwError(() => new HttpErrorResponse({
           status: res.status,
           statusText: res?.statusText ?? '',
@@ -226,7 +231,6 @@ export class HttpInterceptorService implements HttpInterceptor {
 
     const username = this.configurationService.clientId;
     const authHeader = 'Basic ' + btoa(`${username}:`);
-
 
     console.log(params, authHeader);
 

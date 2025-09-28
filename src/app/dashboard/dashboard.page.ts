@@ -1,11 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { COMMON_MODULES } from '../shared/imports/imports';
-import { LOADER_COUNT } from '../shared/constants/loader';
 import { DashboardService } from './service/dashboard/dashboard-service';
 import { DashboardData } from './model/dashboard';
-import { SiteService } from '../site-selection/service/site/site-service';
-import { Router } from '@angular/router';
 import { IonModal, NavController } from '@ionic/angular/standalone';
+import { PractitionerService } from '../practitioner-selection/service/practitioner/practitioner-service';
 
 
 
@@ -37,13 +35,14 @@ export class DashboardPage implements OnInit, AfterViewInit {
     { title: 'avatar-9' },
   ]
 
-  constructor(private dashboardService: DashboardService, private siteService: SiteService, private router: NavController) {
-    this.userName = this.siteService.userInfo.title + ' ' + this.siteService.userInfo.firstName + ' ' + this.siteService.userInfo.lastName;
+  constructor(private dashboardService: DashboardService,private practitionerService:PractitionerService, private router: NavController) {
+
+    this.userName = this.practitionerService.getPractionerInfo.username;
   }
 
   ngOnInit() {
     this.getAppointmentInfo();
-    this.siteId = localStorage.getItem('site_id') || 'HC2016'
+    this.siteId = localStorage.getItem('site_id') || 'HC2016';
   }
 
 
@@ -56,6 +55,8 @@ export class DashboardPage implements OnInit, AfterViewInit {
     }
 
   }
+
+
 
 
   getAppointmentInfo() {

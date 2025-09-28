@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="ion-display-flex align-center gap-0-75 fs-4">
+      <i class="fa-light fa-chevron-left"></i>
+      <div>Book Appointment</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="py-1">
+    <mbsc-eventcalendar [data]="myEvents" [options]="eventSettings"
+      (onCellClick)="addAppointment($event)"></mbsc-eventcalendar>
+  </div>
+
+  <!-- <ion-modal trigger="open-modal">
+    <ng-template>
+      <from>
+        <div class="ion-display-flex flex-column gap-0-5">
+          <label for="languages">Specialty *</label>
+          <ion-select placeholder="Select a language" interface="action-sheet" id="languages" name="languages"
+            formControlName="type" class="input-main-class px-1 ">
+            @for(address of addressTypes; track address.type) {
+            <ion-select-option [value]="address">{{address.description}}</ion-select-option>
+            }
+          </ion-select>
+        </div>
+        <div class="ion-display-flex flex-column gap-0-5">
+          <label for="languages">Appointment type *</label>
+          <ion-select placeholder="Select a language" interface="action-sheet" id="languages" name="languages"
+            formControlName="type" class="input-main-class px-1 ">
+            @for(address of addressTypes; track address.type) {
+            <ion-select-option [value]="address">{{address.description}}</ion-select-option>
+            }
+          </ion-select>
+        </div>
+        <div class="ion-display-flex flex-column gap-0-5">
+          <label for="languages">Location *</label>
+          <ion-select placeholder="Select a language" interface="action-sheet" id="languages" name="languages"
+            formControlName="type" class="input-main-class px-1 ">
+            @for(address of addressTypes; track address.type) {
+            <ion-select-option [value]="address">{{address.description}}</ion-select-option>
+            }
+          </ion-select>
+        </div>
+      </from>
+    </ng-template>
+  </ion-modal> -->
+</ion-content>

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SiteService {
 
-
+    public practitionerInfo: any;
     constructor(private http: HttpClient) { }
 
     get userInfo(): any {
@@ -79,5 +79,17 @@ export class SiteService {
     }
 
 
+    getPractionerList(): Observable<any> {
+        return this.http.get(`${environment.appointmentUrl}/users/siteparticipantuserdetails`)
+    }
+
+
+    set setPractitionerInfo(info: any) {
+        this.practitionerInfo = info;
+    }
+
+    get getPractitionerInfo(){
+        return this.practitionerInfo;
+    }
 
 }

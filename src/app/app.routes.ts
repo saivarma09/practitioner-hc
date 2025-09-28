@@ -45,6 +45,14 @@ export const routes: Routes = [
     path: 'profile',
     loadComponent: () => import('./profile/profile.page').then( m => m.ProfilePage)
   },
+  {
+    path: 'book-appointment',
+    loadComponent: () => import('./book-appointment/book-appointment.page').then( m => m.BookAppointmentPage)
+  },
+  {
+    path: 'practitioner-selection',
+    loadComponent: () => import('./practitioner-selection/practitioner-selection.page').then( m => m.PractitionerSelectionPage)
+  },
 
 
 

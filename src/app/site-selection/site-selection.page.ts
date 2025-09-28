@@ -14,22 +14,34 @@ import { Router } from '@angular/router';
   imports: [COMMON_MODULES, FORM_MODULES, REACTIVE_FORM_MODULES]
 })
 export class SiteSelectionPage implements OnInit {
-sites:any = [];
-userName:string = '';
-pathFill= 'red'
-siteControl:any = new FormControl('', Validators.required);
-  constructor(private readonly siteService:SiteService, private router:Router) { }
+  sites: any = [];
+  userName: string = '';
+  pathFill = 'red'
+  siteControl: any = new FormControl('', Validators.required);
+  constructor(private readonly siteService: SiteService, private router: Router) { }
 
   ngOnInit() {
-    this.userName = this.siteService.userInfo.title +' '+ this.siteService.userInfo.firstName +' '+ this.siteService.userInfo.lastName
+    this.userName = this.siteService.userInfo.title + ' ' + this.siteService.userInfo.firstName + ' ' + this.siteService.userInfo.lastName
     this.sites = this.siteService.userInfo.sites;
   }
 
-  siteSelected(){
-    if(this.siteControl.valid){
-    localStorage.setItem('site_id', this.siteControl?.value?.siteId);
-    this.router.navigate(['/dashboard']);
+  siteSelected() {
+    if (this.siteControl.valid) {
+      localStorage.setItem('site_id', "HC11206");
+      this.getPractitionerList()
+    }
   }
+
+
+  getPractitionerList() {
+    this.siteService.getPractionerList().subscribe({
+      next: (practionerInfo: any) => {
+        this.siteService.setPractitionerInfo = practionerInfo;
+        console.log(practionerInfo)
+        this.router.navigate(['/practitioner-selection']);
+      },
+      error: () => { }
+    })
   }
 
 }

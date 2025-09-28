@@ -107,6 +107,7 @@ ion-row {
 ion-header ion-toolbar:first-of-type {
     padding-top: max(3rem, var(--ion-safe-area-top, 0)) !important;
 }
+
 ion-modal ion-header ion-toolbar:first-of-type {
     padding-top: max(0rem, var(--ion-safe-area-top, 0)) !important;
 }
@@ -595,12 +596,15 @@ ion-modal ion-header ion-toolbar:first-of-type {
 .pt-3 {
     padding-top: 3rem !important;
 }
+
 .pt-4 {
     padding-top: 3rem !important;
 }
+
 .pt-5 {
     padding-top: 3rem !important;
 }
+
 .pt-6 {
     padding-top: 3rem !important;
 }
@@ -609,6 +613,7 @@ ion-modal ion-header ion-toolbar:first-of-type {
 .pb-0-25 {
     padding-bottom: 0.25rem !important;
 }
+
 .pb-0-5 {
     padding-bottom: 0.5rem !important;
 }
@@ -793,78 +798,78 @@ ion-modal ion-header ion-toolbar:first-of-type {
 
 /* Overflow common classes */
 .overflow-hidden {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .overflow-auto {
-  overflow: auto;
+    overflow: auto;
 }
 
 .overflow-scroll {
-  overflow: scroll;
+    overflow: scroll;
 }
 
 .overflow-visible {
-  overflow: visible;
+    overflow: visible;
 }
 
 /* Direction specific */
 .overflow-x-hidden {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 .overflow-x-auto {
-  overflow-x: auto;
+    overflow-x: auto;
 }
 
 .overflow-y-hidden {
-  overflow-y: hidden;
+    overflow-y: hidden;
 }
 
 .overflow-y-auto {
-  overflow-y: auto;
+    overflow-y: auto;
 }
 
 
 .position-static {
-  position: static;
+    position: static;
 }
 
 .position-relative {
-  position: relative;
+    position: relative;
 }
 
 .position-absolute {
-  position: absolute;
+    position: absolute;
 }
 
 .position-fixed {
-  position: fixed;
+    position: fixed;
 }
 
 .position-sticky {
-  position: sticky;
+    position: sticky;
 }
 
 
 .text-left {
-  text-align: left;
+    text-align: left;
 }
 
 .text-center {
-  text-align: center;
+    text-align: center;
 }
 
 .text-right {
-  text-align: right;
+    text-align: right;
 }
 
 .text-justify {
-  text-align: justify;
+    text-align: justify;
 }
 
 .text-no-wrap {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 ion-action-sheet {
@@ -893,6 +898,7 @@ button[disabled] {
     border: 1px solid var(--ion-border-color) !important;
     border-radius: 0.5rem;
 }
+
 .input-main-class.ion-touched.ion-invalid {
     border: 1px solid var(--ion-color-danger) !important;
 }
@@ -905,11 +911,12 @@ ion-modal::part(content) {
     border-radius: 1rem 1rem 0 0;
 }
 
-.fa-trash{
+.fa-trash {
     color: var(--ion-color-danger);
 }
 
-.select-highlight, .input-highlight{
+.select-highlight,
+.input-highlight {
     display: none !important;
 }
 
@@ -919,29 +926,29 @@ ion-modal::part(content) {
 .select-highlight,
 ion-select .select-highlight,
 .ion-select .select-highlight {
-  display: none !important;
+    display: none !important;
 }
 
 /* Remove highlight from ion-select */
 ion-select {
-  --highlight-height: 0px;
-  --highlight-color-focused: transparent;
-  --highlight-color-valid: transparent;
-  --highlight-color-invalid: transparent;
+    --highlight-height: 0px;
+    --highlight-color-focused: transparent;
+    --highlight-color-valid: transparent;
+    --highlight-color-invalid: transparent;
 }
 
 /* Remove any focus highlight effects */
 ion-select.ion-focused {
-  --highlight-color-focused: transparent;
+    --highlight-color-focused: transparent;
 }
 
 /* Remove highlight for your custom input class */
 .input-main-class {
-  --highlight-height: 0;
+    --highlight-height: 0;
 }
 
 .input-main-class.ion-focused {
-  --highlight-color-focused: transparent;
+    --highlight-color-focused: transparent;
 }
 
 /* Global override to ensure no select highlights anywhere */
@@ -949,18 +956,18 @@ ion-select,
 ion-select.in-item,
 .ion-page ion-select,
 ion-content ion-select {
-  --highlight-height: 0px !important;
-  --highlight-color-focused: transparent !important;
-  --highlight-color-valid: transparent !important;
-  --highlight-color-invalid: transparent !important;
+    --highlight-height: 0px !important;
+    --highlight-color-focused: transparent !important;
+    --highlight-color-valid: transparent !important;
+    --highlight-color-invalid: transparent !important;
 }
 
 
 ion-toggle {
-  --track-background: var(--ion-secondary-color);
-//   --track-background-checked: #ddd;
-//   --handle-background: var(--ion-secondary-text-color);
-// //   --handle-background-checked: var(--ion-btn-primary-color);
+    --track-background: var(--ion-secondary-color);
+    //   --track-background-checked: #ddd;
+    //   --handle-background: var(--ion-secondary-text-color);
+    // //   --handle-background-checked: var(--ion-btn-primary-color);
 }
 
 // ion-toggle::part(track) {
@@ -969,12 +976,32 @@ ion-toggle {
 // }
 
 
-.background-footer{
+.background-footer {
     background: var(--ion-background-color) !important;
 }
 
 
-.ion-datetime-button-overlay.show-modal{
-    --backdrop-opacity:0.5 !important;
+.ion-datetime-button-overlay.show-modal {
+    --backdrop-opacity: 0.5 !important;
 }
 
+.mbsc-calendar {
+    .mbsc-schedule-date-header-text {
+        display: none !important;
+    }
+
+    .mbsc-calendar-controls {
+        .mbsc-button.mbsc-calendar-button {
+            color: var(--ion-primary-color) !important;
+            font-size: clamp(1rem, 1.7vw, 1.25rem) !important;
+            font-family: "manrope", Arial, Helvetica, sans-serif;
+        }
+    }
+
+
+    .mbsc-ios.mbsc-selected .mbsc-calendar-cell-text{
+        background: var(--ion-primary-color);
+        border: var(--ion-primary-color);
+        color: var(--ion-background-color);
+    }
+}
